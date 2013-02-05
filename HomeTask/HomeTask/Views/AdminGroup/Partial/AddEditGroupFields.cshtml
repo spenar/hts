@@ -1,0 +1,25 @@
+﻿@using System.Web.Mvc.Html
+@model HomeTask.Core.ViewModels.GroupViewModel
+<div class="form-horizontal">
+    <div class="control-group">
+        @Html.DisplayNameFor(x => x.Name)
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Name, new { placeholder = "Название" })
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.DisplayNameFor(x => x.Specialty)
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Specialty, new { placeholder = "Специальность" })
+            @Html.ValidationMessageFor(x => x.Specialty)
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.DisplayNameFor(x => x.QuantityOfPupils)
+        <div class="controls">
+            @Html.TextBoxFor(x => x.QuantityOfPupils, new { placeholder = "Количество учеников" })
+            @Html.ValidationMessageFor(x => x.QuantityOfPupils)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@model HomeTask.Core.ViewModels.StudentRegistrationViewModel
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/Layout/_LayoutLogOn.cshtml";
+}
+@section header
+{
+    <script type="text/ecmascript">
+        $(document).ready(function () {
+            $('#institutes').change(function () {
+                var institutID = $(this).val();
+                var url = "@Url.Action("GetGroup", "Group")/?institutionID=" + institutionID;
+                $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: OnSuccess,
+                error: OnError
+            });
+            
+            function OnSuccess(response)
+            {
+                $('#groups').empty();
+                $.each(response, function(i, val)
+                {
+                     $('#groups').append(new Option(val.Name ,val.ID));
+                });
+            }
+            
+            function OnError()
+            {
+                alert('Something going wrong! Try again!');
+            }
+            }
+        });
+    </script>
+    }
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal"}))
+    {
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.Username)
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Username, new {placeholder = "Логин"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.Password)
+            <div class="controls">
+                @Html.PasswordFor(x => x.Password, new {placeholder = "Пароль"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.ConfirmPassword)
+            <div class="controls">
+                @Html.PasswordFor(x => x.ConfirmPassword, new {placeholder = "Подтверждение пароля"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.Email)
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Email, new {placeholder = "Email"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.FirstName)
+            <div class="controls">
+                @Html.PasswordFor(x => x.FirstName, new {placeholder = "Фамилия"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayNameFor(x => x.LastName)
+            <div class="controls">
+                @Html.PasswordFor(x => x.LastName, new {placeholder = "Имя"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayName("Учебное заведение")
+            <div class="controls">
+                @Html.DropDownList("Institution", Model.Institutions, new {placeholder = "Выберите учебное заведение", id = "institutes"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.DisplayName("Группа")
+            <div class="controls">
+                @Html.DropDownList("GroupID", new SelectListItem[0], new {placeholder = "Выберите группу", id = "groups"})
+            </div>
+        </div>
+    }

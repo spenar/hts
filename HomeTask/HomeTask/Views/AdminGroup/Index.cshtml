@@ -1,0 +1,128 @@
+﻿@using System.Web.Mvc.Html
+@using System.Web.Routing
+@model HomeTask.Core.ViewModels.GroupListViewModel
+@{
+    ViewBag.Title = "Группы";
+}
+
+@{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.modal-window-renderer').click(function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.get(url, function (data) {
+                    $('#modalWindow').empty();
+                    $('#modalWindow').html(data);
+                });
+            });
+
+
+            //Show/hide additional of group
+            $('.more-toggle').click(function (e) {
+                e.preventDefault();
+
+                var groupId = $(this).val('group-id');
+                var isVisible = $('tr.group-more[group-id=' + groupId + ']').hasClass('hide');
+                if (isVisible) {
+                    $('tr.group-more[group-id=' + groupId + ']').removeClass('hide');
+                } else {
+                    $('tr.group-more[group-id=' + groupId + ']').addClass('hide');
+                }
+            }
+            );
+        }
+        );
+    </script>
+}
+<legend>Группы</legend>
+<a href="@Url.Action("AddGroup","AdminGroup")" class="btn modal-window-renderer">Добавить группу</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Название
+            </th>
+            <th>
+                Специальность
+            </th>
+            <th>
+                Количество учеников
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int index = 0;
+        }
+        @foreach (var group in Model.ElementsForPage)
+        {
+
+            <tr>
+                <td>
+                    @{++index}
+                </td>
+                <td>@group.Name
+                </td>
+                <td>@group.Specialty
+                </td>
+                <td>@group.QuantityOfPupils
+                </td>
+                <td>
+                    <a class="more-toggle" href="#" group-id="@group.ID">Дополнительные сведенья</a>
+                </td>
+            </tr>
+            <tr class="group-more hide" group-id="@group.ID">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <legend>Ученики</legend>
+                        @{
+                            Html.RenderAction("GetStudentsOfGroup","AdminStudent", new { groupID = @group.ID} );
+                        }
+                    </div>
+                    <div class="span6">
+                        <legend>Предметы</legend>
+                        @{
+                            Html.RenderAction("GetSubjectOfGroup", "AdminSubject", new {groupID = group.ID});
+                        }
+                    </div>
+                </div>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="pagination">
+    <ul>
+        @if(Model.CurrentPageIndex > 1)
+        {
+            <li><a href="@Url.Action("Index", "AdminGroup", new { CurrentPageIndex = Model.CurrentPageIndex-1 })">Prev</a></li>
+        }
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li><a href="@Url.Action("Index", "AdminGroup", new { CurrentPageIndex = i })">@i</a></li>
+        }
+        @if (Model.CurrentPageIndex < Model.PageCount)
+        {
+            <li><a href="@Url.Action("Index", "AdminGroup", new { CurrentPageIndex = Model.CurrentPageIndex+1 })">Next</a></li>
+        }
+    </ul>
+</div>
+<div class="modal hide fade" id="modalWindow">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary"></a>
+  </div>
+</div>

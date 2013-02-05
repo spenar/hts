@@ -1,0 +1,19 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@model HomeTask.Core.ViewModels.GroupViewModel
+@using (Html.BeginForm("Add", "AdminGroup", FormMethod.Post))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;</button>
+        <h3>
+            Добавить группу</h3>
+    </div>
+    <div class="modal-body">
+        Html.RenderPartial("Partial/AddEditGroupFields", Model);
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Сохранить</a>
+        <a href="#" class="btn close-modal-window">Закрыть</a> 
+    </div>
+}
