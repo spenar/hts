@@ -55,7 +55,7 @@ namespace HomeTask.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return View(new StudentRegistrationViewModel());
         }
 
         [HttpPost]

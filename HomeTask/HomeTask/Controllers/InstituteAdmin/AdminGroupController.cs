@@ -15,6 +15,13 @@ namespace HomeTask.Controllers.InstituteAdmin
     {
         private readonly IGroupManager _groupManager;
         private readonly IInstitutionManager _institutionManager;
+        private object GetInstitutionID
+        {
+            get
+            {
+                return this._institutionManager.GetByUserID(this.CurrentUserID).ID;
+            }
+        }
 
         public AdminGroupController(IGroupManager groupManager, IInstitutionManager institutionManager)
         {
@@ -25,14 +32,31 @@ namespace HomeTask.Controllers.InstituteAdmin
         [HttpGet]
         public ActionResult Index(GroupListViewModel viewModel)
         {
-            var institutionID = this._institutionManager.GetByUserID(this.CurrentUserID).ID;
 
             viewModel.GroupViewModels = this._groupManager
-                                        .GetAll(institutionID)
-                                        .Select(GroupMapper.ToViewModelExpression)
-                                        .ToList();
+                                            .GetAll(this.GetInstitutionID)
+                                            .Select(GroupMapper.ToViewModelExpression)
+                                            .ToList();
 
             return View(viewModel);
         }
+
+        [HttpGet]
+        public ActionResult AddGroup()
+        {
+            return this.PartialView("Partial/AddGroup");
+        }
+
+        [HttpPost]
+        public ActionResult AddGroup(GroupViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = viewModel.ToModel();
+                this._groupManager.Add(model, this.GetInstitutionID);
+            }
+            return this.Json(new {success = false});
+        }
+
     }
 }

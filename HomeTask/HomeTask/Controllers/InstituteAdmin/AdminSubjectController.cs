@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HomeTask.Core.Mappers;
+using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
 
@@ -18,13 +20,29 @@ namespace HomeTask.Controllers.InstituteAdmin
             this._subjectManager = subjectManager;
         }
 
-        [ChildActionOnly]
-        public ActionResult GetSubjectOfGroup(int groupID)
+        [HttpGet]
+        public ActionResult GetSubjectForGroup(ulong groupID)
         {
-            var subjects = this._subjectManager.GetByGroup(groupID).Select(x => x.Name);
+            if (Request.IsAjaxRequest())
+            {
+                var viewModel = new SubjectListViewModel();
+                viewModel.SubjectViewModels =
+                    this._subjectManager.GetByGroup(groupID).Select(SubjectMapper.ToViewModelExpression).ToList();
 
-            return PartialView("Partial/GetSubjectOfGroup",subjects);
+                return PartialView("Partial/GetSubjectOfGroup", viewModel);
+            }
+            return RedirectToAction("Index", "AdminGroup");
         }
+
+        [HttpPost]
+        public ActionResult AddSubjectForGroup(SubjectEditPageViewModel viewModel, ulong groupID)
+        {
+            var subjects = viewModel.SubjectViewModels.Select(SubjectMapper.ToModelExpression.Compile());
+            this._subjectManager.AddSubjectForGroup(subjects, groupID);
+
+            return this.Json(new {success = true});
+        }
+
 
     }
 }

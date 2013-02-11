@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc
-@using System.Web.Mvc.Html
+﻿@using System.Web.Mvc.Html
 @model HomeTask.Core.ViewModels.StudentRegistrationViewModel
 @{
     ViewBag.Title = "Регистрация";
@@ -19,11 +18,13 @@
                 success: OnSuccess,
                 error: OnError
             });
+            });
             
             function OnSuccess(response)
             {
                 $('#groups').empty();
-                $.each(response, function(i, val)
+                eval('var data=' + response)
+                $.each(data, function(i, val)
                 {
                      $('#groups').append(new Option(val.Name ,val.ID));
                 });
@@ -33,59 +34,64 @@
             {
                 alert('Something going wrong! Try again!');
             }
-            }
         });
-    </script>
-    }
 
+    </script>
+}
+<legend>Регистрация</legend>
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal"}))
     {
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.Username)
+            @Html.LabelFor(x => x.Username, new { @class = "control-label" })
             <div class="controls">
                 @Html.TextBoxFor(x => x.Username, new {placeholder = "Логин"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.Password)
+            @Html.LabelFor(x => x.Password, new { @class = "control-label" })
             <div class="controls">
                 @Html.PasswordFor(x => x.Password, new {placeholder = "Пароль"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.ConfirmPassword)
+            @Html.LabelFor(x => x.ConfirmPassword, new { @class = "control-label" })
             <div class="controls">
                 @Html.PasswordFor(x => x.ConfirmPassword, new {placeholder = "Подтверждение пароля"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.Email)
+            @Html.LabelFor(x => x.Email, new { @class = "control-label" })
             <div class="controls">
                 @Html.TextBoxFor(x => x.Email, new {placeholder = "Email"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.FirstName)
+            @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
             <div class="controls">
                 @Html.PasswordFor(x => x.FirstName, new {placeholder = "Фамилия"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayNameFor(x => x.LastName)
+            @Html.LabelFor(x => x.LastName, new { @class = "control-label" })
             <div class="controls">
                 @Html.PasswordFor(x => x.LastName, new {placeholder = "Имя"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayName("Учебное заведение")
+            @Html.Label("Учебное заведение", new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownList("Institution", Model.Institutions, new {placeholder = "Выберите учебное заведение", id = "institutes"})
             </div>
         </div>
         <div class="control-group">
-            @Html.DisplayName("Группа")
+            @Html.Label("Группа", new { @class = "control-label" })
             <div class="controls">
                 @Html.DropDownList("GroupID", new SelectListItem[0], new {placeholder = "Выберите группу", id = "groups"})
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     }

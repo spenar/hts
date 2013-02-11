@@ -12,13 +12,9 @@ namespace HomeTask.Managers.Contracts
 
         IQueryable<Group> GetAll(object insitutionID);
 
-        bool TeacherTeachesGroup(object teacherID, object groupID);
+        void Add(Group group, object insitutionID);
 
-        bool GroupTeachesSubject(object groupID, object subjectID);
-
-        void Add(Group group, IEnumerable<object> subjectsID ,object insitutionID);
-
-        void Update(Group group, IEnumerable<object> subjectsID);
+        void Update(Group group);
 
         void Delete(object ID);
 

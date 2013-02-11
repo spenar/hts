@@ -17,6 +17,8 @@ namespace HomeTask.Models
 
         public ulong TeacherID { get; set; }
 
+        public ulong SubjectID { get; set; }
+
         [ForeignKey("GroupID")]
         public virtual Group Group { get; set; }
 

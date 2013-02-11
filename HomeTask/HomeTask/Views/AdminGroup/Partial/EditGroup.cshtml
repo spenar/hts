@@ -1,7 +1,7 @@
 ﻿@using System.Web.Mvc
 @using System.Web.Mvc.Html
 @model HomeTask.Core.ViewModels.GroupViewModel
-@using (Html.BeginForm("Edit", "AdminGroup", FormMethod.Post))
+@using (Html.BeginForm("EditGroup", "AdminGroup", FormMethod.Post, new { @class = "product-form"}))
 {
     @Html.HiddenFor(x => x.ID)
     <div class="modal-header">

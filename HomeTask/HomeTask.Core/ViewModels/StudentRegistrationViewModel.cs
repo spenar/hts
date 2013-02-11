@@ -9,6 +9,11 @@ namespace HomeTask.Core.ViewModels
 {
     public class StudentRegistrationViewModel : UserViewModel
     {
+        public StudentRegistrationViewModel()
+        {
+            this.Institutions = new List<SelectListItem>();
+        }
+
         public ulong GroupID { get; set; }
 
         [Compare("Password")]

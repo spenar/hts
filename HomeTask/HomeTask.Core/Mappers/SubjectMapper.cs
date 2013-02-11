@@ -18,6 +18,13 @@ namespace HomeTask.Core.Mappers
                                                                                                   Name = subject.Name
                                                                                               };
 
+        public static Expression<Func<SubjectViewModel, Subject>> ToModelExpression = viewModel =>
+                                                                                      new Subject()
+                                                                                          {
+                                                                                              ID = viewModel.ID,
+                                                                                              Name = viewModel.Name
+                                                                                          };
+
         public static SubjectViewModel ToViewModel(this Subject model)
         {
             var viewModel = new SubjectViewModel();

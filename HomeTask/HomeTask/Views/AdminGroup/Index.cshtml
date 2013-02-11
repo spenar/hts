@@ -9,13 +9,35 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            //
             $('.modal-window-renderer').click(function (e) {
                 e.preventDefault();
                 var url = $(this).attr('href');
                 $.get(url, function (data) {
                     $('#modalWindow').empty();
                     $('#modalWindow').html(data);
+                    $('#map_canvas').modal('show');
                 });
+            });
+
+            $('.close-modal-window').click(function (e) {
+                e.preventDefault();
+                $('#map_canvas').modal('hide');
+            });
+
+
+            $('.product-form').onsubmit(function (e) {
+                e.preventDefault();
+                var url = $(this).attr('action');
+                $.post(url, $(this).serialize(),
+                    function (data) {
+                        eval('var success=' + data);
+                        if (success) {
+                            $('#map_canvas').modal('hide');
+                        } else {
+                            alert("Ошибка! Невозможно выполнить запрос на сервер.");
+                        }
+                    });
             });
 
 
@@ -66,7 +88,7 @@
 
             <tr>
                 <td>
-                    @{++index}
+                    @{ ++index;}
                 </td>
                 <td>@group.Name
                 </td>

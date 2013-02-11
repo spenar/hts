@@ -24,7 +24,7 @@ namespace HomeTask.Managers
 
         public IQueryable<Student> GetByGroudID(object groupID)
         {
-            this._studentRepository.GetAll().Where(x => x.GroupID == (ulong) groupID);
+            return this._studentRepository.GetAll().Where(x => x.GroupID == (ulong) groupID);
         }
 
         public void Add(Student student)

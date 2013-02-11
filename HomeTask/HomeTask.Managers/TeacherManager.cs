@@ -44,39 +44,20 @@ namespace HomeTask.Managers
             return this._teacherRepository.IsEntityExist(ID);
         }
 
-        public void Add(Teacher teacher, IEnumerable<object> groupsID, object insitutionID)
+        public void Add(Teacher teacher, object insitutionID)
         {
             if (this.ValidateEntity(teacher))
             {
                 teacher.InstitutionID = (ulong)insitutionID;
                 this._teacherRepository.Add(teacher);
                 this._teacherRepository.Commit();
-
-                this.AddGropsForTeacher(teacher.ID, groupsID);
             }
         }
 
-        public void Update(Teacher teacher, IEnumerable<object> groupsID)
+        public void Update(Teacher teacher)
         {
             if (this.ValidateEntity(teacher))
             {
-                var dbGroups = this._groupToTeacherRepository
-                                   .GetAll()
-                                   .Where(x => x.TeacherID == teacher.ID);
-
-                foreach (var group in dbGroups)
-                {
-                    if (groupsID.Contains(group.GroupID))
-                    {
-                        continue;
-                    }
-                    this._groupToTeacherRepository.Delete(group.ID);
-                }
-
-                this.AddGropsForTeacher(teacher.ID,
-                    groupsID
-                    .Where(x => !dbGroups.Select(g2t => g2t.GroupID).Contains((ulong)x)));
-
                 this._teacherRepository.Update(teacher);
                 this._teacherRepository.Commit();
             }

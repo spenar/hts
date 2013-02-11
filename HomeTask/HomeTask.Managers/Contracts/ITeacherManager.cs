@@ -18,9 +18,9 @@ namespace HomeTask.Managers.Contracts
 
         bool IsExist(object ID);
 
-        void Add(Teacher teacher, IEnumerable<object> groupsID, object insitutionID);
+        void Add(Teacher teacher, object insitutionID);
 
-        void Update(Teacher teacher, IEnumerable<object> groupsID);
+        void Update(Teacher teacher);
 
         void Delete(object ID);
     }

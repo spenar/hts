@@ -18,12 +18,15 @@ namespace HomeTask.Controllers
             this._groupManager = groupManager;
         }
 
+
         public ActionResult GetGroup(ulong institutionID)
         {
             var groups = this._groupManager.GetAll(institutionID).Select(GroupMapper.ToViewModelExpression);
 
             return this.Json(groups);
         }
+
+
 
     }
 }

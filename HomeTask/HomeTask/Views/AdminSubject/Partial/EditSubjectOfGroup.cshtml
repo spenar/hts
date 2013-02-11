@@ -1,0 +1,38 @@
+﻿@model HomeTask.Core.ViewModels.SubjectEditPageViewModel
+
+<form class="form-inline">
+  @Html.DropDownList("subjects", Model.InstituteSubjectsList)
+  <input type="password" class="input-small" placeholder="Password">
+  @Html.ActionLink("Добавить предмет", "AddSubjectForGroup", "AdminSubject") 
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            @Html.LabelFor(x => x.SubjectViewModels.FirstOrDefault().Name)
+        </th>
+        <th>
+            Действия
+        </th>
+    </tr>
+    @{ var index = 0;}
+    @foreach (var subject in Model.SubjectViewModels)
+    {
+        index++;
+        <tr>
+            <td>
+                @index;
+            </td>
+            <td>
+                @subject.Name
+            </td>
+            <td>
+                <a href="#" class="delete-subject-button">Удалить</a>
+                <input type="hidden" class=""/>
+            </td>
+        </tr>
+    }
+</table>

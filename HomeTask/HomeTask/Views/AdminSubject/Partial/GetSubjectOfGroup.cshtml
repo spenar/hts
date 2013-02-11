@@ -1,8 +1,25 @@
-﻿@model IEnumerable<string>
-
-<ol>
-    @foreach (var name in Model)
+﻿@model HomeTask.Core.ViewModels.SubjectListViewModel
+<table class="table table-bordered">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            @Html.LabelFor(x => x.SubjectViewModels.FirstOrDefault().Name)
+        </th>
+    </tr>
+    @{ var index = 0;}
+    @foreach (var subject in Model.SubjectViewModels)
     {
-        <li>@name</li>
+        index++;
+        <tr>
+            <td>
+                @index;
+            </td>
+            <td>
+                @subject.Name
+            </td>
+        </tr>
     }
-</ol>
+</table>
+@Html.ActionLink("Редактировать предметы")

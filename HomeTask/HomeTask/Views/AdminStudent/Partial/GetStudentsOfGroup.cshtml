@@ -1,8 +1,25 @@
 ﻿@model IEnumerable<string>
 
-<ol>
-    @foreach (var name in Model)
+<table class="table table-bordered">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Имя
+        </th>
+    </tr>
+    @{ var index = 0;}
+    @foreach (var student in Model)
     {
-        <li>@name</li>
+        index++;
+        <tr>
+            <td>
+               @index;
+            </td>
+            <td>
+                @student
+            </td>
+        </tr>
     }
-</ol>
+</table>

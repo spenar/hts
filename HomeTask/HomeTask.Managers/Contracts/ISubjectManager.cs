@@ -16,6 +16,8 @@ namespace HomeTask.Managers.Contracts
 
         void Add(Subject subject, object insitutionID);
 
+        void AddSubjectForGroup(IEnumerable<Subject> subjects, object groupID);
+
         void Update(Subject subject);
 
         bool IsExist(object ID);
