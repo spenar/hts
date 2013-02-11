@@ -105,14 +105,15 @@
                     <div class="span6">
                         <legend>Ученики</legend>
                         @{
-                            Html.RenderAction("GetStudentsOfGroup","AdminStudent", new { groupID = @group.ID} );
+                            Html.RenderAction("GetStudentsOfGroup","AdminStudent", new { groupID = group.ID} );
                         }
                     </div>
                     <div class="span6">
                         <legend>Предметы</legend>
                         @{
-                            Html.RenderAction("GetSubjectOfGroup", "AdminSubject", new {groupID = group.ID});
+                            Html.RenderAction("GetSubjectForGroup", "AdminSubject", new { groupID = group.ID });
                         }
+                        <a href="@Url.Action("SubjectEditPage", "AdminSubject", new { groupID = group.ID })" class="modal-window-renderer">Редактировать предметы</a>
                     </div>
                 </div>
             </tr>

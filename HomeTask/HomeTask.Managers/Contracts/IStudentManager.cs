@@ -12,6 +12,8 @@ namespace HomeTask.Managers.Contracts
 
         IQueryable<Student> GetByGroudID(object groupID);
 
+        IQueryable<Student> GetByInstitute(object instituteID);
+
         void Add(Student student);
 
         void Update(Student student);

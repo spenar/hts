@@ -60,7 +60,9 @@
     <Compile Include="ViewModels\GroupListViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\InstitutionViewModel.cs" />
+    <Compile Include="ViewModels\StudentListViewModel.cs" />
     <Compile Include="ViewModels\StudentRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\SubjectEditPageViewModel.cs" />
     <Compile Include="ViewModels\SubjectListViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />

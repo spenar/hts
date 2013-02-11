@@ -12,6 +12,8 @@ namespace HomeTask.Managers.Contracts
 
         Institution GetByUserID(object ID);
 
+        IQueryable<Institution> GetAll();
+
         void Add(Institution institution);
 
         void AddAdministrator(object institutionID, Guid userID);

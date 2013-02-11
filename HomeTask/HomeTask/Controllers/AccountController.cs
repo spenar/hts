@@ -13,10 +13,12 @@ namespace HomeTask.Controllers
     public class AccountController : Controller
     {
         private readonly IStudentManager _studentManager;
+        private readonly IInstitutionManager _institutionManager;
 
-        public AccountController(IStudentManager studentManager)
+        public AccountController(IStudentManager studentManager, IInstitutionManager institutionManager)
         {
             this._studentManager = studentManager;
+            this._institutionManager = institutionManager;
         }
 
         [HttpGet]
@@ -55,7 +57,14 @@ namespace HomeTask.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View(new StudentRegistrationViewModel());
+            var viewModel = new StudentRegistrationViewModel();
+            viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
+                {
+                    Value = x.ID.ToString(),
+                    Text = x.Name
+                });
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -73,6 +82,7 @@ namespace HomeTask.Controllers
                             GroupID = viewModel.GroupID,
                             IsConfirmed = false,
                             Surname = viewModel.FirstName,
+                            InstitutionID = viewModel.InstitutionID,
                             UserID = WebSecurity.GetUserId(viewModel.Username)
                         });
 

@@ -80,7 +80,7 @@
         <div class="control-group">
             @Html.Label("Учебное заведение", new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownList("Institution", Model.Institutions, new {placeholder = "Выберите учебное заведение", id = "institutes"})
+                @Html.DropDownList("Institution", Model.Institutions, new { name = "InstitutionID", placeholder = "Выберите учебное заведение", id = "InstitutionID" })
             </div>
         </div>
         <div class="control-group">

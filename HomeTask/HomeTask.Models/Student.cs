@@ -16,10 +16,12 @@ namespace HomeTask.Models
 
         public string Name { get; set; }
 
+        public bool IsConfirmed { get; set; }
+
         public ulong GroupID { get; set; }
 
         public Guid UserID { get; set; }
 
-        public bool IsConfirmed { get; set; }
+        public ulong InstitutionID { get; set; }
     }
 }

@@ -27,6 +27,11 @@ namespace HomeTask.Managers
             return this._studentRepository.GetAll().Where(x => x.GroupID == (ulong) groupID);
         }
 
+        public IQueryable<Student> GetByInstitute(ulong instituteID)
+        {
+            return this._studentRepository.GetAll().Where(x => x.InstitutionID == instituteID);
+        }
+
         public void Add(Student student)
         {
             if (this.Validate(student))
@@ -54,6 +59,7 @@ namespace HomeTask.Managers
         {
             return true;
         }
+
 
     }
 }

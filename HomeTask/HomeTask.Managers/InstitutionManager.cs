@@ -30,6 +30,11 @@ namespace HomeTask.Managers
             return _institutionRepository.Get(institution2user.InstitutionID);
         }
 
+        public IQueryable<Institution> GetAll()
+        {
+            return this._institutionRepository.GetAll();
+        }
+
         public void Add(Institution institution)
         {
             if (this.Validate(institution))
@@ -66,6 +71,7 @@ namespace HomeTask.Managers
         {
             return true;
         }
+
 
     }
 }
