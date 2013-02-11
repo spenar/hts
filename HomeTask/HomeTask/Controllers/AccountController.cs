@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using HomeTask.Core.Helpers;
 using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models;
+using HomeTask.Models.Roles;
 
 namespace HomeTask.Controllers
 {
@@ -36,6 +38,8 @@ namespace HomeTask.Controllers
                 var isSuccess = WebSecurity.Login(viewModel.Username, viewModel.Password);
                 if (isSuccess)
                 {
+                    var userID = WebSecurity.GetUserId(viewModel.Username);
+                    Session.SetUserID(userID);
 
                     return RedirectToLocal(returnUrl);
                 }
@@ -43,11 +47,11 @@ namespace HomeTask.Controllers
                 ModelState.AddModelError("Login error!", "Неверный логин или пароль");
                 return View(viewModel);
             }
-            
+
             return View(viewModel);
         }
 
-          public ActionResult LogOff()
+        public ActionResult LogOff()
         {
             WebSecurity.Logout();
 
@@ -110,6 +114,19 @@ namespace HomeTask.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
+        private void InitializeSession(string userName)
+        {
 
+            if (Roles.IsUserInRole(userName, RolesNames.InstituteAdministrator))
+            {
+                var institutionID = this._institutionManager.GetByUserID(Session.GetUserID());
+                Session.SetInstitutionID(institutionID);
+            }
+            else if (Roles.IsUserInRole(userName, RolesNames.Student))
+            {
+                var institutiuonID = this._studentManager.GetByUserID(Session.GetUserID());
+                Roles.
+            }
+        }
     }
 }

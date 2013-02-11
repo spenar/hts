@@ -24,7 +24,7 @@ namespace HomeTask.Controllers.InstituteAdmin
             }
         }
 
-        public AdminSubjectController(ISubjectManager subjectManager, IInstitutionManager institutionManager)
+        public AdminSubjectController(ISubjectManager subjectManager, IInstitutionManager institutionManager):base()
         {
             this._subjectManager = subjectManager;
             this._institutionManager = institutionManager;
