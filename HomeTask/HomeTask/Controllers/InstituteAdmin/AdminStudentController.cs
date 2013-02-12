@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HomeTask.Core.Helpers;
+using HomeTask.Core.Mappers;
 using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
@@ -42,7 +44,13 @@ namespace HomeTask.Controllers.InstituteAdmin
         public ActionResult Index()
         {
             var viewModel = new StudentListViewModel();
-            viewModel.StudentList = this._studentManager.
+            viewModel.StudentList =
+                this._studentManager
+                    .GetByInstitute(Session.GetInstitutionID())
+                    .Select(StudentMapper.ToViewModelExpression.Compile())
+                    .ToList();
+
+            return View(viewModel);
         }
 
     }

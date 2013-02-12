@@ -16,11 +16,13 @@ namespace HomeTask.Controllers
     {
         private readonly IStudentManager _studentManager;
         private readonly IInstitutionManager _institutionManager;
+        private readonly ITeacherManager _teacherManager;
 
-        public AccountController(IStudentManager studentManager, IInstitutionManager institutionManager)
+        public AccountController(IStudentManager studentManager, IInstitutionManager institutionManager, ITeacherManager teacherManager)
         {
             this._studentManager = studentManager;
             this._institutionManager = institutionManager;
+            this._teacherManager = teacherManager;
         }
 
         [HttpGet]
@@ -40,7 +42,7 @@ namespace HomeTask.Controllers
                 {
                     var userID = WebSecurity.GetUserId(viewModel.Username);
                     Session.SetUserID(userID);
-
+                    InitializeSession();
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -80,6 +82,7 @@ namespace HomeTask.Controllers
                                      viewModel.LastName);
                 if (status == MembershipCreateStatus.Success)
                 {
+                    var userID = WebSecurity.GetUserId(viewModel.Username);
                     this._studentManager.Add(new Student()
                         {
                             Name = viewModel.LastName,
@@ -87,8 +90,9 @@ namespace HomeTask.Controllers
                             IsConfirmed = false,
                             Surname = viewModel.FirstName,
                             InstitutionID = viewModel.InstitutionID,
-                            UserID = WebSecurity.GetUserId(viewModel.Username)
+                            UserID = userID
                         });
+                    Session.SetUserID(userID);
 
                     return this.RedirectToLocal(@Url.Action("Index", "Home"));
                 }
@@ -114,9 +118,9 @@ namespace HomeTask.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        private void InitializeSession(string userName)
+        private void InitializeSession()
         {
-
+            var userName = this.User.Identity.Name;
             if (Roles.IsUserInRole(userName, RolesNames.InstituteAdministrator))
             {
                 var institutionID = this._institutionManager.GetByUserID(Session.GetUserID());
@@ -124,8 +128,13 @@ namespace HomeTask.Controllers
             }
             else if (Roles.IsUserInRole(userName, RolesNames.Student))
             {
-                var institutiuonID = this._studentManager.GetByUserID(Session.GetUserID());
-                Roles.
+                var institutiuonID = this._studentManager.GetByUserID(Session.GetUserID()).InstitutionID;
+                Session.SetInstitutionID(institutiuonID);
+            }
+            else if (Roles.IsUserInRole(RolesNames.Teacher))
+            {
+                var institutiuonID = this._teacherManager.GetTeacherIdByAccountId(Session.GetUserID());
+                Session.SetInstitutionID(institutiuonID);
             }
         }
     }

@@ -1,0 +1,31 @@
+﻿@model HomeTask.Core.ViewModels.StudentListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+<table class="table table-striped">
+    <thead>
+        <th>#</th>
+        <th>@Html.LabelFor(x => x.StudentList.FirstOrDefault().Surname)</th>
+        <th>@Html.LabelFor(x => x.StudentList.FirstOrDefault().Name)</th>
+        <th>@Html.LabelFor(x => x.StudentList.FirstOrDefault().Group)</th>
+        <th>@Html.LabelFor(x => x.StudentList.FirstOrDefault().IsConfirmed)</th>
+        <th>Действия</th> 
+    </thead>
+    <tbody>
+        @{ int index = 0;}
+        @foreach (var student in Model.ElementsForPage)
+        {
+            ++index;
+            <tr>
+                <td>@index</td>
+                <td>@student.Surname</td>
+                <td>@student.Name</td>
+                <td>@student.Group</td>
+                <td>@Html.DisplayFor(x => student.IsConfirmed)</td>
+                <td><a href="#" class="btn btn-primary"></a></td>
+            </tr>
+        }
+    </tbody>
+</table>

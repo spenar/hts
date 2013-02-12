@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using HomeTask.Models.Contracts;
@@ -23,5 +24,8 @@ namespace HomeTask.Models
         public Guid UserID { get; set; }
 
         public ulong InstitutionID { get; set; }
+
+        [ForeignKey("GroupID")]
+        public virtual Group Group { get; set; }
     }
 }

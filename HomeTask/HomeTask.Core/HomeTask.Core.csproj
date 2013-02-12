@@ -56,6 +56,7 @@
     <Compile Include="Helpers\SessionKeys\SessionKey.cs" />
     <Compile Include="HomeTaskContext.cs" />
     <Compile Include="Mappers\GroupMapper.cs" />
+    <Compile Include="Mappers\StudentMapper.cs" />
     <Compile Include="Mappers\SubjectMapper.cs" />
     <Compile Include="Mappers\TeacherMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
