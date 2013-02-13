@@ -51,7 +51,8 @@ namespace HomeTask.Controllers
                 menu = new List<MenuItem>()
                     {
                         new MenuItem() {Action = "Index", Controller = "Home", Text = "Главная"},
-                        new MenuItem() {Action = "Index", Controller = "Group", Text = "Группы"}
+                        new MenuItem() {Action = "Index", Controller = "Group", Text = "Группы"},
+                        new MenuItem() {Action = "Index", Controller = "Subjects", Text = "Предметы"}
                     };
             }
 
@@ -64,7 +65,8 @@ namespace HomeTask.Controllers
                         new MenuItem() {Action = "Index", Controller = "Home", Text = "Главная"},
                         new MenuItem() {Action = "Index", Controller = "AdminGroup", Text = "Группы"},
                         new MenuItem() {Action = "Index", Controller = "AdminTeacher", Text = "Преподаватели"},
-                        new MenuItem() {Action = "Index", Controller = "AdminSubject", Text = "Предметы"}
+                        new MenuItem() {Action = "Index", Controller = "AdminSubject", Text = "Предметы"},
+                        new MenuItem() {Action = "Index", Controller = "AdminStudent", Text = "Студенты"}
                     };
             }
 

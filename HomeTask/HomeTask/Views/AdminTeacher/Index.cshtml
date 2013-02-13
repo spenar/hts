@@ -1,0 +1,28 @@
+﻿@model HomeTask.Core.ViewModels.TeacherListViewModel
+
+@{
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+
+<table class="table table-striped">
+    <thead>
+        <th>#</th>
+        <th>@Html.LabelFor(x => x.TeacherViewModels.FirstOrDefault().Surname)</th>
+        <th>@Html.LabelFor(x => x.TeacherViewModels.FirstOrDefault().Name)</th>
+        <th>Действия</th> 
+    </thead>
+    <tbody>
+        @{ int index = 0;}
+        @foreach (var teacher in Model.ElementsForPage)
+        {
+            ++index;
+            <tr>
+                <td>@index</td>
+                <td>@teacher.Surname</td>
+                <td>@teacher.Name</td>
+                <td><a href="#" class="btn btn-primary"></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -34,7 +34,7 @@ namespace HomeTask.Managers
             return this._teacherRepository.GetAll().Where(x => x.InstitutionID == (ulong)insitutionID);
         }
 
-        public Teacher GetTeacherIdByAccountId(object ID)
+        public Teacher GetUserId(object ID)
         {
             return this._teacherRepository.GetAll().FirstOrDefault(x => x.UserID == (ulong)ID);
         }

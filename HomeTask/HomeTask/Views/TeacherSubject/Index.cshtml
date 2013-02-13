@@ -1,0 +1,32 @@
+﻿@model HomeTask.Core.ViewModels.TeacherSubjectListViewModel
+
+@{
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+<legend>Вы преподаете предметы</legend>
+<a href="@Url.Action("Add", "TeacherSubject", new { teacherID = Model.TeacherID } )">Добавить предмет</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+        <th>#</th>
+            <th>@Html.LabelFor(x => x.SubjectViewModels.FirstOrDefault().Name)</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var index = 0;}
+        @foreach (var subject in Model.ElementsForPage)
+        {
+            index++;
+            <tr>
+                <td>@index</td>
+                <td>
+                    @subject.Name
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "TeacherSubject", new { teacherID = Model.TeacherID, subjectID = subject.ID})">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

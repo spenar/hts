@@ -41,9 +41,8 @@ namespace HomeTask.Controllers.InstituteAdmin
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(StudentListViewModel viewModel)
         {
-            var viewModel = new StudentListViewModel();
             viewModel.StudentList =
                 this._studentManager
                     .GetByInstitute(Session.GetInstitutionID())

@@ -12,5 +12,9 @@ namespace HomeTask.Core.Helpers.SessionKeys
         public const string UserId = "UserId";
 
         public const string InstitutionID = "InstitutuionId";
+
+        public const string TeacherID = "TeacherID";
+
+        public const string StudentID = "StudentID";
     }
 }

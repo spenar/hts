@@ -154,7 +154,9 @@
     <Compile Include="Controllers\InstituteAdmin\AdminGroupController.cs" />
     <Compile Include="Controllers\InstituteAdmin\AdminStudentController.cs" />
     <Compile Include="Controllers\InstituteAdmin\AdminSubjectController.cs" />
+    <Compile Include="Controllers\InstituteAdmin\AdminTeacherController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
+    <Compile Include="Controllers\Teacher\TeacherSubjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,7 +235,7 @@
     <Content Include="Views\Account\LogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Registrations\StudentRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminGroup\Index.cshtml" />
@@ -261,6 +263,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminStudent\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminTeacher\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Registrations\TeacherRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherSubject\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherSubject\Partial\Add.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

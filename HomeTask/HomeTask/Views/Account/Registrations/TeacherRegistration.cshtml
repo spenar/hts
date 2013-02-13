@@ -1,0 +1,58 @@
+﻿@model HomeTask.Core.ViewModels.TeacherRegistrationViewModel
+
+@{
+    ViewBag.Title = "TeacherRegistration";
+    Layout = "~/Views/Shared/Layout/_LayoutLogOn.cshtml";
+}
+<legend>Регистрация</legend>
+    @using (Html.BeginForm("TeacherRegistretion", "Account", FormMethod.Post, new {@class = "form-horizontal"}))
+    {
+        <div class="control-group">
+            @Html.LabelFor(x => x.Username, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Username, new {placeholder = "Логин"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(x => x.Password, new {placeholder = "Пароль"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.ConfirmPassword, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(x => x.ConfirmPassword, new {placeholder = "Подтверждение пароля"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Email, new {placeholder = "Email"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(x => x.FirstName, new {placeholder = "Фамилия"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(x => x.LastName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(x => x.LastName, new {placeholder = "Имя"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.Label("Учебное заведение", new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownList("InstitutionID", Model.Institutions, new { name = "InstitutionID", placeholder = "Выберите учебное заведение", id = "InstitutionID" })
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+

@@ -14,7 +14,7 @@ namespace HomeTask.Managers.Contracts
 
         IQueryable<Teacher> GetByGroup(object groupID);
 
-        Teacher GetTeacherIdByAccountId(object ID);
+        Teacher GetUserId(object ID);
 
         bool IsExist(object ID);
 

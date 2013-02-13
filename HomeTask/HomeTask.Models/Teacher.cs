@@ -19,7 +19,9 @@ namespace HomeTask.Models
         [Required]
         public string Name { get; set; }
 
-        public ulong UserID { get; set; }
+        public bool IsConfirmed { get; set; }
+
+        public Guid UserID { get; set; }
 
         public ICollection<Teacher2Subject> Subjects { get; set; }
 

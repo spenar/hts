@@ -12,6 +12,7 @@ namespace HomeTask.Managers
     {
         private readonly IRepository<Subject> _subjectRepository;
         private readonly IRepository<Group2Subject> _groupToSubjectRepository;
+        private readonly IRepository<Teacher2Subject> _teacherToSubjectRepository;
         private readonly IRepository<Group> _groupRepository;
 
         public SubjectManager(IRepository<Subject> subjectRepository, IRepository<Group2Subject> groupToSubjectRepository, IRepository<Group> groupRepository)
@@ -29,6 +30,29 @@ namespace HomeTask.Managers
         public IQueryable<Subject> GetAll(object insitutionID)
         {
             return this._subjectRepository.GetAll().Where(x => x.InstitutionID == (ulong)insitutionID);
+        }
+
+        public IQueryable<Subject> GetByTeacher(object teacherID)
+        {
+            var subject2Teacher = this._teacherToSubjectRepository
+                                 .GetAll()
+                                 .Where(x => x.TeacherID == (ulong)teacherID);
+
+            return this._subjectRepository
+                       .GetAll()
+                       .Where(subject => subject2Teacher.Any(x => x.SubjectID == subject.ID));
+        }
+
+        public IQueryable<Subject> GetByGroup(object groupID)
+        {
+            var groupToSubject =
+                this._groupToSubjectRepository.GetAll()
+                    .Where(x => x.GroupID == (ulong)groupID);
+
+            return this._subjectRepository
+                       .GetAll()
+                       .Where(x => groupToSubject.Any(z => z.SubjectID == x.ID));
+
         }
 
         public void Add(Subject subject, object insitutionID)
@@ -87,18 +111,6 @@ namespace HomeTask.Managers
         public bool IsExist(object ID)
         {
             return this._subjectRepository.IsEntityExist(ID);
-        }
-
-
-        public IQueryable<Subject> GetByGroup(object groupID)
-        {
-            var subjectsID =
-                this._groupToSubjectRepository.GetAll()
-                    .Where(x => x.GroupID == (ulong)groupID)
-                    .Select(x => x.SubjectID);
-
-            return this._subjectRepository.GetAll().Where(x => subjectsID.Contains(x.ID));
-
         }
 
         private bool Validate(Subject subject)

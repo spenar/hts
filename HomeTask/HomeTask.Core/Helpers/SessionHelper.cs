@@ -39,5 +39,25 @@ namespace HomeTask.Core.Helpers
         {
             session[SessionKey.InstitutionID] = ID;
         }
+
+        public static void SetTeacherID(this HttpSessionStateBase session, object teacherID)
+        {
+            session[SessionKey.TeacherID] = teacherID;
+        }
+
+        public static object GetTeacherID(this HttpSessionStateBase session)
+        {
+            return session[SessionKey.TeacherID];
+        }
+
+        public static void SetStudentID(this HttpSessionStateBase session, object studentID)
+        {
+            session[SessionKey.StudentID] = studentID;
+        }
+
+        public static object GetStudentID(this HttpSessionStateBase session)
+        {
+            return session[SessionKey.StudentID];
+        }
     }
 }
