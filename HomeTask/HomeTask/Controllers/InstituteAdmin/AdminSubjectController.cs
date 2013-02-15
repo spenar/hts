@@ -51,7 +51,7 @@ namespace HomeTask.Controllers.InstituteAdmin
             {
                 var viewModel = new SubjectEditPageViewModel();
                 viewModel.InstituteSubjectsList = this._subjectManager
-                                                      .GetAll(this.GetInstitutionID)
+                                                      .GetByGroup(groupID)
                                                       .Select(x => new SelectListItem()
                                                           {
                                                               Value = x.ID.ToString(),

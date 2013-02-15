@@ -15,10 +15,5 @@ namespace HomeTask.Models
 
         [Required]
         public string Name { get; set; }
-
-        public ulong InstitutionID { get; set; }
-
-        [ForeignKey("InstitutionID")]
-        public Institution Institution { get; set; }
     }
 }

@@ -27,11 +27,6 @@ namespace HomeTask.Managers
             return this._subjectRepository.Get(ID);
         }
 
-        public IQueryable<Subject> GetAll(object insitutionID)
-        {
-            return this._subjectRepository.GetAll().Where(x => x.InstitutionID == (ulong)insitutionID);
-        }
-
         public IQueryable<Subject> GetByTeacher(object teacherID)
         {
             var subject2Teacher = this._teacherToSubjectRepository
@@ -55,11 +50,10 @@ namespace HomeTask.Managers
 
         }
 
-        public void Add(Subject subject, object insitutionID)
+        public void Add(Subject subject)
         {
             if (this.Validate(subject))
             {
-                subject.InstitutionID = (ulong)insitutionID;
                 this._subjectRepository.Add(subject);
                 this._subjectRepository.Commit();
             }
@@ -99,6 +93,32 @@ namespace HomeTask.Managers
             }
         }
 
+
+        public void AddSubjectForTeacher(Subject subject, object teacherID)
+        {
+            var subjectInDb =
+                this._subjectRepository.GetAll()
+                    .FirstOrDefault(x => x.Name.Equals(subject.Name, StringComparison.OrdinalIgnoreCase));
+            ulong subjectID;
+
+            if (subjectInDb == null)
+            {
+                this._subjectRepository.Add(subject);
+                this._subjectRepository.Commit();
+                subjectID = subject.ID;
+            }
+            else
+            {
+                subjectID = subjectInDb.ID;
+            }
+
+            this._teacherToSubjectRepository.Add(new Teacher2Subject()
+            {
+                SubjectID = subjectID,
+                TeacherID = (ulong)teacherID
+            });
+        }
+
         public void Update(Subject subject)
         {
             if (this.Validate(subject))
@@ -117,5 +137,7 @@ namespace HomeTask.Managers
         {
             return true;
         }
+
+
     }
 }

@@ -72,7 +72,6 @@
     <Compile Include="ViewModels\SubjectViewModel.cs" />
     <Compile Include="ViewModels\TeacherListViewModel.cs" />
     <Compile Include="ViewModels\TeacherRegistrationViewModel.cs" />
-    <Compile Include="ViewModels\TeacherSubjectListViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>

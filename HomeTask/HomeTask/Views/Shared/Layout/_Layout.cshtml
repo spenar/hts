@@ -22,13 +22,13 @@
                 $.get(url, function (data) {
                     $('#modalWindow').empty();
                     $('#modalWindow').html(data);
-                    $('#map_canvas').modal('show');
+                    $('#modalWindow').modal('show');
                 });
             });
 
             $('.close-modal-window').click(function (e) {
                 e.preventDefault();
-                $('#map_canvas').modal('hide');
+                $('#modalWindow').modal('hide');
             });
 
 
@@ -39,9 +39,9 @@
                     function (data) {
                         eval('var success=' + data);
                         if (success) {
-                            $('#map_canvas').modal('hide');
+                            $('#modalWindow').modal('hide');
                         } else {
-                            alert("Ошибка! Невозможно выполнить запрос на сервер.");
+                            alert("Ошибка! Что-то пошло не правильно...");
                         }
                     });
             });

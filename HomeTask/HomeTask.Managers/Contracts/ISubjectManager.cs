@@ -10,15 +10,15 @@ namespace HomeTask.Managers.Contracts
     {
         Subject GetById(object ID);
 
-        IQueryable<Subject> GetAll(object insitutionID);
-
         IQueryable<Subject> GetByGroup(object groupID);
 
         IQueryable<Subject> GetByTeacher(object teacherID);
 
-        void Add(Subject subject, object insitutionID);
+        void Add(Subject subject);
 
         void AddSubjectForGroup(IEnumerable<Subject> subjects, object groupID);
+
+        void AddSubjectForTeacher(Subject subject, object teacherID);
 
         void Update(Subject subject);
 

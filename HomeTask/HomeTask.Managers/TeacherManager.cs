@@ -36,7 +36,7 @@ namespace HomeTask.Managers
 
         public Teacher GetUserId(object ID)
         {
-            return this._teacherRepository.GetAll().FirstOrDefault(x => x.UserID == (ulong)ID);
+            return this._teacherRepository.GetAll().FirstOrDefault(x => x.UserID == (Guid)ID);
         }
 
         public bool IsExist(object ID)

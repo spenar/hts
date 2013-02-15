@@ -1,14 +1,18 @@
-﻿@model HomeTask.Core.ViewModels.TeacherSubjectListViewModel
+﻿@model HomeTask.Core.ViewModels.SubjectListViewModel
 
 @{
     Layout = "~/Views/Shared/Layout/_Layout.cshtml";
 }
+@section header
+{
+    
+}
 <legend>Вы преподаете предметы</legend>
-<a href="@Url.Action("Add", "TeacherSubject", new { teacherID = Model.TeacherID } )">Добавить предмет</a>
+<a href="@Url.Action("Add", "TeacherSubject")">Добавить предмет</a>
 <table class="table table-hover">
     <thead>
         <tr>
-        <th>#</th>
+            <th>#</th>
             <th>@Html.LabelFor(x => x.SubjectViewModels.FirstOrDefault().Name)</th>
             <th>Действия</th>
         </tr>
@@ -24,9 +28,22 @@
                     @subject.Name
                 </td>
                 <td>
-                    <a href="@Url.Action("Delete", "TeacherSubject", new { teacherID = Model.TeacherID, subjectID = subject.ID})">Удалить</a>
+                    <a href="@Url.Action("Delete", "TeacherSubject", new { subjectID = subject.ID})">Удалить</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div class="modal hide fade" id="modalWindow">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary"></a>
+  </div>
+</div>

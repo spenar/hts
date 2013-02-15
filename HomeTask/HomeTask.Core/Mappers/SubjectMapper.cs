@@ -33,7 +33,7 @@ namespace HomeTask.Core.Mappers
             return viewModel;
         }
 
-        public static Subject ToModel(this Subject viewModel)
+        public static Subject ToModel(this SubjectViewModel viewModel)
         {
             var model = new Subject();
             model.InjectFrom(viewModel);

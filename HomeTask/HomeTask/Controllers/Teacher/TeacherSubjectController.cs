@@ -21,21 +21,46 @@ namespace HomeTask.Controllers.Teacher
             this._subjectManager = subjectManager;
         }
 
-        public ActionResult Index(TeacherSubjectListViewModel viewModel)
+        public ActionResult Index(SubjectListViewModel viewModel)
         {
             viewModel.SubjectViewModels =
                 this._subjectManager.GetByTeacher(Session.GetTeacherID())
                     .Select(SubjectMapper.ToViewModelExpression.Compile())
                     .ToList();
-            viewModel.TeacherID = (ulong)Session.GetTeacherID();
 
             return View(viewModel);
         }
 
         [HttpGet]
-        public ActionResult Add(ulong teacherID)
+        public ActionResult Add()
         {
-            return View()
+            return this.PartialView("Partial/Add");
+        }
+
+        [HttpPost]
+        public ActionResult Add(SubjectViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var teacherID = Session.GetTeacherID();
+                if (teacherID != null)
+                {
+                    var subject = model.ToModel();
+                    this._subjectManager.AddSubjectForTeacher(subject, teacherID);
+
+                    return this.Json(new { success = true });
+                }
+
+                return HttpNotFound();
+            }
+
+            return this.Json(new {success = false});
+        }
+
+        [HttpGet]
+        public ActionResult Delete(ulong subjectID)
+        {
+            return this.PartialView();
         }
     }
 }
