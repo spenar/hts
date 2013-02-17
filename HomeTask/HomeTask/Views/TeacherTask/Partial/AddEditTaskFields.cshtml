@@ -1,0 +1,27 @@
+﻿@model HomeTask.Core.ViewModels.TaskViewModel
+<div class="form-horizontal">
+    <div class="control-group">
+        @Html.LabelFor(x => x.GroupID, new { @class = "control-label" });
+        <div class="controls">
+            @Html.DropDownListFor(x => x, new List<SelectListItem>(), new { placeholder = "Группа" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(x => x.TypeName, new { @class = "control-label" });
+        <div class="controls">
+            @Html.TextBoxFor(x => x.TypeName, new { placeholder = "Тип задания" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(x => x.Title, new { @class = "control-label" });
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Title, new { placeholder = "Тема" })
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(x => x.Text, new { @class = "control-label" });
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Text, new { placeholder = "Текст задания" })
+        </div>
+    </div>
+</div>

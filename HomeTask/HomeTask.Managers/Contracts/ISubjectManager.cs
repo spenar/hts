@@ -20,6 +20,8 @@ namespace HomeTask.Managers.Contracts
 
         void AddSubjectForTeacher(Subject subject, object teacherID);
 
+        void DeleteSubject2Teacher(object subjectID, object teacherID);
+
         void Update(Subject subject);
 
         bool IsExist(object ID);

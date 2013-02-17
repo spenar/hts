@@ -34,7 +34,9 @@ namespace HomeTask.Managers
             return _taskRepository.GetAll()
                                   .Where(filter.TeacherFilter)
                                   .Where(filter.GroupFilter)
+                                  .Where(filter.SubjectFilter)
                                   .Where(filter.DateFilter);
+;
         }
 
         public void Add(Task task, object teacherID, object groupID, object typeOfTaskID)
@@ -74,5 +76,12 @@ namespace HomeTask.Managers
         {
             return true;
         }
+
+
+        public Task GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

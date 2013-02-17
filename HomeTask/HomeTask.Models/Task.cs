@@ -16,6 +16,8 @@ namespace HomeTask.Models
         [Required]
         public string Text { get; set; }
 
+        public string Title { get; set; }
+
         public string FileName { get; set; }
 
         public DateTime Date { get; set; }

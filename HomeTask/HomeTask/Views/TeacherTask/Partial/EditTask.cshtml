@@ -1,0 +1,18 @@
+﻿@model HomeTask.Core.ViewModels.TaskViewModel
+
+@using (Html.BeginForm("Edit", "TeacherTask", FormMethod.Post, new { @class = "submit-form" }))
+{
+    <div class="modal hide fade" id="modalWindow">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Добавить задание</h3>
+  </div>
+  <div class="modal-body">
+    <p>@Html.Partial("Partial/AddEditTaskFields")</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn close-modal-window">Закрыть</a>
+    <a href="#" class="btn btn-primary">Сохранить</a>
+  </div>
+</div>
+}

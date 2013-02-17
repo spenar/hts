@@ -8,7 +8,7 @@
     
 }
 <legend>Вы преподаете предметы</legend>
-<a href="@Url.Action("Add", "TeacherSubject")">Добавить предмет</a>
+<a href="@Url.Action("Add", "TeacherSubject")" class="btn btn-primary modal-window-renderer">Добавить предмет</a>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -28,7 +28,7 @@
                     @subject.Name
                 </td>
                 <td>
-                    <a href="@Url.Action("Delete", "TeacherSubject", new { subjectID = subject.ID})">Удалить</a>
+                    <a href="@Url.Action("DeleteSubject2Teacher", "TeacherSubject", new { subjectID = subject.ID })" class="btn btn-danger modal-window-renderer">Удалить из списка</a>
                 </td>
             </tr>
         }

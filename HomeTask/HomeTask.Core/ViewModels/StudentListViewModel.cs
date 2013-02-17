@@ -36,6 +36,8 @@ namespace HomeTask.Core.ViewModels
                         return this.SortAscending
                                    ? Elements.OrderByDescending(x => x.IsConfirmed).ToList()
                                    : Elements.OrderBy(x => x.IsConfirmed).ToList();
+
+                    default: return this.Elements.OrderBy(x => x.Surname).ToList();
                 }
             }
         }

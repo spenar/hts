@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "_TaskLayout";
+    Layout = "~/Views/Shared/Layout/_Layout.cshtml";
+}
+<div class="row">
+    <div class="span3">@RenderSection("TaskMenu")</div>
+    <div class="span6">@RenderSection("TaskBody")</div>
+</div>

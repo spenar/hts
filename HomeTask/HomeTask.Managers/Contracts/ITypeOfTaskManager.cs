@@ -10,7 +10,11 @@ namespace HomeTask.Managers.Contracts
     {
         TypeOfTask GetById(object ID);
 
-        void Add(TypeOfTask typeOfTask, object teacherID);
+        TypeOfTask GetByName(string name);
+
+        IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<ulong> identifiers);
+
+        void Add(TypeOfTask typeOfTask);
 
         void Update(TypeOfTask typeOfTask);
 

@@ -58,7 +58,9 @@
     <Compile Include="Mappers\GroupMapper.cs" />
     <Compile Include="Mappers\StudentMapper.cs" />
     <Compile Include="Mappers\SubjectMapper.cs" />
+    <Compile Include="Mappers\TaskMapper.cs" />
     <Compile Include="Mappers\TeacherMapper.cs" />
+    <Compile Include="Mappers\TypeOfTaskMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortableModels\SortableModel.cs" />
     <Compile Include="ViewModels\GroupListViewModel.cs" />
@@ -70,9 +72,12 @@
     <Compile Include="ViewModels\SubjectEditPageViewModel.cs" />
     <Compile Include="ViewModels\SubjectListViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />
+    <Compile Include="ViewModels\TaskListViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TeacherListViewModel.cs" />
     <Compile Include="ViewModels\TeacherRegistrationViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
+    <Compile Include="ViewModels\TypeOfTaskViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

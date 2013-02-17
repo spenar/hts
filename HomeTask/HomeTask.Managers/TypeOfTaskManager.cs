@@ -22,11 +22,18 @@ namespace HomeTask.Managers
             return this._typeOfTaskRepository.Get(ID);
         }
 
-        public void Add(TypeOfTask typeOfTask, object teacherID)
+
+        public TypeOfTask GetByName(string name)
+        {
+            return
+                this._typeOfTaskRepository.GetAll()
+                    .FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public void Add(TypeOfTask typeOfTask)
         {
             if (this.Validate(typeOfTask))
             {
-                typeOfTask.TeacherID = (ulong)teacherID;
                 this._typeOfTaskRepository.Add(typeOfTask);
                 this._typeOfTaskRepository.Commit();
             }
@@ -50,6 +57,12 @@ namespace HomeTask.Managers
         public bool IsExist(object ID)
         {
             return this._typeOfTaskRepository.IsEntityExist(ID);
+        }
+
+
+        public IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<ulong> identifiers)
+        {
+            return this._typeOfTaskRepository.GetAll().Where(x => identifiers.Any(z => z == x.ID));
         }
     }
 }

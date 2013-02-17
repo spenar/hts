@@ -1,0 +1,25 @@
+﻿@model HomeTask.Core.ViewModels.TaskListViewModel
+@{
+    Layout = "~/Views/Shared/Layout/_TaskLayout.cshtml";
+}
+@section TaskMenu
+{
+    @Html.RenderAction("Groups", "TeacherTask", new { selectedGroup = Model.GroupID })
+}
+@section TaskBody
+{
+    <ul class="breadcrumb">
+        @foreach (var subject in Model.GroupSubjects)
+        {
+       
+            <li class="@(subject.ID == Model.SubjectID ? "active" : "")"><a href="@Url.Action("Index", "TeacherTask", new { subjectID = subject.ID, groupID = Model.GroupID })">@subject.Name</a> <span class="divider">/</span></li>
+            <li class="active">Data</li>
+        }
+    </ul>
+    <a href="@Url.Action("AddTask", "TeacherTask")" class="btn btn-large btn-primary modal-window-renderer">Добавить новое задание</a>
+    @foreach (var task in Model.Tasks)
+    {
+        <h3>@task.Title @Html.Raw(" ")<small>Тип: @(Model.Types.FirstOrDefault(x => x.ID == task.TypeID) == null ? "" : Model.Types.FirstOrDefault(x => x.ID == task.TypeID).Name)</small>@Html.Raw(" ")<small>Добавлено: @task.Date.ToString()</small></h3>
+        <p>@task.Text</p>
+    }
+}

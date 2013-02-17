@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
-using HomeTask.Models.Contracts;
 
-namespace HomeTask.Models
+namespace HomeTask.Core.ViewModels
 {
-    public class TypeOfTask : IEntity
+    public class TypeOfTaskViewModel
     {
-        [Key]
         public ulong ID { get; set; }
 
         [Required]

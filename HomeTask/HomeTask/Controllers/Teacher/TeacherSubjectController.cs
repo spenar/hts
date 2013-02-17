@@ -58,9 +58,16 @@ namespace HomeTask.Controllers.Teacher
         }
 
         [HttpGet]
+        public ActionResult DeleteSubject2Teacher(ulong subjectID)
+        {
+            return this.PartialView("Partial/Delete", subjectID);
+        }
+
+        [HttpPost]
         public ActionResult Delete(ulong subjectID)
         {
-            return this.PartialView();
+            this._subjectManager.DeleteSubject2Teacher(subjectID, Session.GetTeacherID());
+            return this.Json(new {success = true});
         }
     }
 }

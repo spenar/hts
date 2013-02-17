@@ -1,0 +1,19 @@
+﻿@model ulong
+
+@using (Html.BeginForm("Delete", "TeacherSubject", FormMethod.Post))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;</button>
+        <h3>
+            Подтверждение</h3>
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(x => x)
+        Вы уверены что хотите удалить предмет из списка?
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Да" class="btn btn-primary"/> <a href="#" class="btn close-modal-window">
+                                                                      Нет</a>
+    </div>
+}

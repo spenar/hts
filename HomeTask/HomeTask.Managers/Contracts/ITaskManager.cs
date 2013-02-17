@@ -13,7 +13,7 @@ namespace HomeTask.Managers.Contracts
 
         IQueryable<Task> GetByFilter(TaskFilter filter);
 
-        void Add(Task task, object teacherID, object groupID, object typeOfTaskID);
+        void Add(Task task);
 
         void Update(Task task);
 

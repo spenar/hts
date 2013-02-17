@@ -145,8 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Context\DataContext.cs" />
-    <Compile Include="Context\DataContextInitializer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
@@ -157,6 +155,7 @@
     <Compile Include="Controllers\InstituteAdmin\AdminTeacherController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Controllers\Teacher\TeacherSubjectController.cs" />
+    <Compile Include="Controllers\Teacher\TeacherTaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -275,6 +274,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\TeacherSubject\Partial\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherSubject\Partial\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layout\_TaskLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherTask\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherTask\Partial\AddTask.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherTask\Partial\AddEditTaskFields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherTask\Partial\EditTask.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

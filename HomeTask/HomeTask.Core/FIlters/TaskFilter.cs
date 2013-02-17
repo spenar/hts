@@ -14,6 +14,8 @@ namespace HomeTask.Core.FIlters
 
         public object TeacherID { get; set; }
 
+        public object SubjectID { get; set; }
+
         public DateTime? DateFrom { get; set; }
 
         public DateTime? DateTo { get; set; }
@@ -31,6 +33,11 @@ namespace HomeTask.Core.FIlters
         public Expression<Func<Task, bool>> DateFilter
         {
             get { return task => this.GroupID == null || task.Date.Ticks > DateFrom.Value.Ticks && task.Date.Ticks < this.DateTo.Value.Ticks; }
+        }
+
+        public Expression<Func<Task, bool>> SubjectFilter
+        {
+            get { return task => this.SubjectID == null || task.SubjectID == (ulong) this.SubjectID; }
         }
     }
 }

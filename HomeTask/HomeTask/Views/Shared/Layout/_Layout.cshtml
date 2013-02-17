@@ -32,7 +32,7 @@
             });
 
 
-            $('.submit-form').onsubmit(function (e) {
+            $('.submit-form').live("onsubmit",function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
                 $.post(url, $(this).serialize(),

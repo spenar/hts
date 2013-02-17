@@ -133,11 +133,21 @@ namespace HomeTask.Managers
             return this._subjectRepository.IsEntityExist(ID);
         }
 
+        public void DeleteSubject2Teacher(object subjectID, object teacherID)
+        {
+            var subject2Teacher = this._teacherToSubjectRepository.GetAll()
+                                      .FirstOrDefault(x => x.SubjectID == (ulong) subjectID && x.TeacherID == (ulong) teacherID);
+            if (subject2Teacher != null)
+            {
+                this._teacherToSubjectRepository.Delete(subject2Teacher.ID);
+            }
+        }
+
         private bool Validate(Subject subject)
         {
             return true;
         }
 
-
+       
     }
 }
