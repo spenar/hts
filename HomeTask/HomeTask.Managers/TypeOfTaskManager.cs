@@ -60,9 +60,9 @@ namespace HomeTask.Managers
         }
 
 
-        public IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<ulong> identifiers)
+        public IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<long> identifiers)
         {
-            return this._typeOfTaskRepository.GetAll().Where(x => identifiers.Any(z => z == x.ID));
+            return this._typeOfTaskRepository.GetAll().Where(x => identifiers.Any(z => z == x.Id));
         }
     }
 }

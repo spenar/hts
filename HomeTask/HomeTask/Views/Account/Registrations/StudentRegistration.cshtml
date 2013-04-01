@@ -10,7 +10,7 @@
         $(document).ready(function () {
             $('#institutes').change(function () {
                 var institutID = $(this).val();
-                var url = "@Url.Action("GetGroup", "Group")/?institutionID=" + institutionID;
+                var url = "@Url.Action("GetGroups", "Group")/?institutionID=" + institutionID;
                 $.ajax({
                 type: "GET",
                 url: url,
@@ -68,19 +68,19 @@
         <div class="control-group">
             @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
             <div class="controls">
-                @Html.PasswordFor(x => x.FirstName, new {placeholder = "Фамилия"})
+                @Html.TextBoxFor(x => x.FirstName, new { placeholder = "Имя" })
             </div>
         </div>
         <div class="control-group">
             @Html.LabelFor(x => x.LastName, new { @class = "control-label" })
             <div class="controls">
-                @Html.PasswordFor(x => x.LastName, new {placeholder = "Имя"})
+                @Html.TextBoxFor(x => x.LastName, new {placeholder = "Фамилия"})
             </div>
         </div>
         <div class="control-group">
             @Html.Label("Учебное заведение", new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownList("Institution", Model.Institutions, new { name = "InstitutionID", placeholder = "Выберите учебное заведение", id = "InstitutionID" })
+                @Html.DropDownListFor(x => x.InstitutionID, Model.Institutions)
             </div>
         </div>
         <div class="control-group">
@@ -91,7 +91,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Регистрация", "StudentRegistration", "Account", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     }

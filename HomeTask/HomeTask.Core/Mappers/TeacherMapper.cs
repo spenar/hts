@@ -16,7 +16,7 @@ namespace HomeTask.Core.Mappers
                                                                                               {
                                                                                                   Name = teacher.Name,
                                                                                                   Surname = teacher.Surname,
-                                                                                                  ID = teacher.ID
+                                                                                                  ID = teacher.Id
                                                                                               };
 
         public static TeacherViewModel ToViewModel(this Teacher model)

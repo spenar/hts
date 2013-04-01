@@ -9,10 +9,10 @@ using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
 
-namespace HomeTask.Controllers.InstituteAdmin
+namespace HomeTask.Controllers.InstituteManager
 {
     [Authorize(Roles = RolesNames.InstituteAdministrator)]
-    public class AdminStudentController : BaseController
+    public class StudentManagerController : BaseController
     {
         private readonly IStudentManager _studentManager;
         private readonly IInstitutionManager _institutionManager;
@@ -21,11 +21,11 @@ namespace HomeTask.Controllers.InstituteAdmin
         {
             get
             {
-                return this._institutionManager.GetByUserID(this.CurrentUserID).ID;
+                return this._institutionManager.GetByUserID(this.CurrentUserID).Id;
             }
         }
 
-        public AdminStudentController(IStudentManager studentManager, IInstitutionManager institutionManager)
+        public StudentManagerController(IStudentManager studentManager, IInstitutionManager institutionManager)
         {
             this._studentManager = studentManager;
             this._institutionManager = institutionManager;
@@ -45,7 +45,7 @@ namespace HomeTask.Controllers.InstituteAdmin
         {
             viewModel.StudentList =
                 this._studentManager
-                    .GetByInstitute(Session.GetInstitutionID())
+                    .GetByInstitute(this.HttpContext.Cache.GetInstitutionID())
                     .Select(StudentMapper.ToViewModelExpression.Compile())
                     .ToList();
 

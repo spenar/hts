@@ -1,0 +1,45 @@
+﻿@model HomeTask.Core.ViewModels.InstitutionViewModel
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.Name)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Name, new { placeholder = "Название" })
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.Accreditation)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Accreditation, new { placeholder = "Акредитация" })
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.Director)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Accreditation, new { placeholder = "Директор" })
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.Address)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Accreditation, new { placeholder = "Адрес" })
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.City)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Accreditation, new { placeholder = "Город" })
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" >@Html.DisplayNameFor(x => x.Country)</label>
+    <div class="controls">
+        @Html.TextBoxFor(x => x.Accreditation, new { placeholder = "Страна" })
+    </div>
+</div>
+  <div class="control-group">
+      <div class="controls">
+          <input type="submit" class="btn btn-primary" value="Сохранить"/>
+          <input type="submit" class="btn  close-modal-window" value="Закрыть"/>
+      </div>
+  </div>
+
+

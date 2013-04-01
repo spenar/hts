@@ -12,7 +12,7 @@ namespace HomeTask.Managers.Contracts
 
         TypeOfTask GetByName(string name);
 
-        IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<ulong> identifiers);
+        IQueryable<TypeOfTask> GetByIdentifiers(IEnumerable<long> identifiers);
 
         void Add(TypeOfTask typeOfTask);
 

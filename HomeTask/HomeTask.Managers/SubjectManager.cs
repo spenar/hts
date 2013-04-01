@@ -31,22 +31,22 @@ namespace HomeTask.Managers
         {
             var subject2Teacher = this._teacherToSubjectRepository
                                  .GetAll()
-                                 .Where(x => x.TeacherID == (ulong)teacherID);
+                                 .Where(x => x.TeacherID == (long)teacherID);
 
             return this._subjectRepository
                        .GetAll()
-                       .Where(subject => subject2Teacher.Any(x => x.SubjectID == subject.ID));
+                       .Where(subject => subject2Teacher.Any(x => x.SubjectID == subject.Id));
         }
 
         public IQueryable<Subject> GetByGroup(object groupID)
         {
             var groupToSubject =
                 this._groupToSubjectRepository.GetAll()
-                    .Where(x => x.GroupID == (ulong)groupID);
+                    .Where(x => x.GroupID == (long)groupID);
 
             return this._subjectRepository
                        .GetAll()
-                       .Where(x => groupToSubject.Any(z => z.SubjectID == x.ID));
+                       .Where(x => groupToSubject.Any(z => z.SubjectID == x.Id));
 
         }
 
@@ -67,24 +67,24 @@ namespace HomeTask.Managers
             {
 
 
-                var dbSubjects2Group = this._groupToSubjectRepository.GetAll().Where(x => x.GroupID == (ulong)groupID);
+                var dbSubjects2Group = this._groupToSubjectRepository.GetAll().Where(x => x.GroupID == (long)groupID);
                 foreach (var subject in dbSubjects2Group)
                 {
-                    if (subjects.Any(x => x.ID == subject.SubjectID))
+                    if (subjects.Any(x => x.Id == subject.SubjectID))
                     {
                         continue;
                     }
-                    this._groupToSubjectRepository.Delete(subject.ID);
+                    this._groupToSubjectRepository.Delete(subject.Id);
                 }
 
                 foreach (var subject in subjects)
                 {
-                    if (!dbSubjects2Group.Any(x => x.SubjectID == subject.ID) && this.IsExist(subject.ID))
+                    if (!dbSubjects2Group.Any(x => x.SubjectID == subject.Id) && this.IsExist(subject.Id))
                     {
                         this._groupToSubjectRepository.Add(new Group2Subject()
                         {
-                            GroupID = (ulong)groupID,
-                            SubjectID = subject.ID
+                            GroupID = (long)groupID,
+                            SubjectID = subject.Id
                         });
                     }
                 }
@@ -99,23 +99,23 @@ namespace HomeTask.Managers
             var subjectInDb =
                 this._subjectRepository.GetAll()
                     .FirstOrDefault(x => x.Name.Equals(subject.Name, StringComparison.OrdinalIgnoreCase));
-            ulong subjectID;
+            long subjectID;
 
             if (subjectInDb == null)
             {
                 this._subjectRepository.Add(subject);
                 this._subjectRepository.Commit();
-                subjectID = subject.ID;
+                subjectID = subject.Id;
             }
             else
             {
-                subjectID = subjectInDb.ID;
+                subjectID = subjectInDb.Id;
             }
 
             this._teacherToSubjectRepository.Add(new Teacher2Subject()
             {
                 SubjectID = subjectID,
-                TeacherID = (ulong)teacherID
+                TeacherID = (long)teacherID
             });
         }
 
@@ -136,10 +136,10 @@ namespace HomeTask.Managers
         public void DeleteSubject2Teacher(object subjectID, object teacherID)
         {
             var subject2Teacher = this._teacherToSubjectRepository.GetAll()
-                                      .FirstOrDefault(x => x.SubjectID == (ulong) subjectID && x.TeacherID == (ulong) teacherID);
+                                      .FirstOrDefault(x => x.SubjectID == (long) subjectID && x.TeacherID == (long) teacherID);
             if (subject2Teacher != null)
             {
-                this._teacherToSubjectRepository.Delete(subject2Teacher.ID);
+                this._teacherToSubjectRepository.Delete(subject2Teacher.Id);
             }
         }
 

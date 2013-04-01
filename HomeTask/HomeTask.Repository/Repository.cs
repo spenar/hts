@@ -39,7 +39,7 @@ namespace HomeTask.Repository
 
         public void Update(TEntity entity)
         {
-            var dbEntity = this.Get(entity.ID);
+            var dbEntity = this.Get(entity.Id);
             if (dbEntity != null)
             {
                 this._context.Entry(dbEntity).CurrentValues.SetValues(dbEntity);

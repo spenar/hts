@@ -39,20 +39,17 @@ namespace HomeTask.Managers
 ;
         }
 
-        public void Add(Task task, object teacherID, object groupID, object typeOfTaskID)
+        public void Add(Task task)
         {
-            var isTeacherExist = this._teacherManager.IsExist(teacherID);
-            var isGroupExist = this._groupManager.IsExist(groupID);
-            var isTypeOfTask = this._typeOfTaskManager.IsExist(typeOfTaskID);
+            var isTeacherExist = this._teacherManager.IsExist(task.TeacherID);
+            var isGroupExist = this._groupManager.IsExist(task.GroupID);
+            var isTypeOfTask = this._typeOfTaskManager.IsExist(task.TypeID);
 
             if (this.Validate(task)
                 && isTeacherExist
                 && isGroupExist
                 && isTypeOfTask)
             {
-                task.TeacherID = (ulong)teacherID;
-                task.GroupID = (ulong)groupID;
-                task.TypeID = (ulong)typeOfTaskID;
                 this._taskRepository.Add(task);
                 this._taskRepository.Commit();
             }
@@ -82,6 +79,5 @@ namespace HomeTask.Managers
         {
             throw new NotImplementedException();
         }
-
     }
 }

@@ -25,7 +25,7 @@ namespace HomeTask.Managers
 
         public Institution GetByUserID(object userID)
         {
-            var institution2user = _institutionToUserRepository.GetAll().FirstOrDefault(x => x.UserID == (Guid) userID);
+            var institution2user = _institutionToUserRepository.GetAll().FirstOrDefault(x => x.UserID == (Guid)userID);
 
             return _institutionRepository.Get(institution2user.InstitutionID);
         }
@@ -44,11 +44,11 @@ namespace HomeTask.Managers
             }
         }
 
-        public void AddAdministrator(object institutionID, Guid userID)
+        public void AddInstitution2User(object institutionID, Guid userID)
         {
             this._institutionToUserRepository.Add(new Institution2User()
                 {
-                    InstitutionID = (ulong)institutionID,
+                    InstitutionID = (long)institutionID,
                     UserID = userID
                 });
             this._institutionToUserRepository.Commit();

@@ -11,7 +11,7 @@ namespace HomeTask.Models
     public class Group : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -22,9 +22,9 @@ namespace HomeTask.Models
         [Required]
         public int QuantityOfPupils { get; set; }
 
-        public ulong InstitutionID { get; set; }
+        [ForeignKey("Institution")]
+        public long InstitutionID { get; set; }
 
-        [ForeignKey("InstitutionID")]
-        public Institution Institution { get; set; }
+        public virtual Institution Institution { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace HomeTask.Controllers
 
         protected Guid CurrentUserID
         {
-            get { return (Guid)Session.GetUserID(); }
+            get { return (Guid)this.HttpContext.Cache.GetUserID(); }
         }
 
         public BaseController()
         {
             var ID = WebSecurity.GetUser(CurrentUserName).ProviderUserKey;
-            Session.SetUserID(ID is Guid ? (Guid) ID : Guid.Empty);
+            this.HttpContext.Cache.SetUserID(ID is Guid ? (Guid)ID : Guid.Empty);
         }
     }
 }

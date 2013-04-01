@@ -8,7 +8,7 @@ namespace HomeTask.Core.ViewModels
 {
     public class SubjectViewModel
     {
-        public ulong ID { get; set; }
+        public object ID { get; set; }
 
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public string Name { get; set; }

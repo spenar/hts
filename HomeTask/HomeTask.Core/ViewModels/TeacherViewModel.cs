@@ -8,7 +8,7 @@ namespace HomeTask.Core.ViewModels
 {
     public class TeacherViewModel
     {
-        public ulong ID { get; set; }
+        public object ID { get; set; }
 
         [Required(ErrorMessage = "Поле не может быть пустым")]
         [Display(Name = "Фамилия")]

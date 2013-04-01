@@ -38,7 +38,7 @@ namespace HomeTask.Controllers
                                 SubMenuItems = _subjectManager
                                 .GetByGroup(_studentManager.GetByUserID(this.CurrentUserID).GroupID)
                                 .ToList()
-                                .Select(x => new MenuItem(){ Action = "Index/" + x.ID, Controller = "Task", Text = x.Name})
+                                .Select(x => new MenuItem(){ Action = "Index/" + x.Id, Controller = "Task", Text = x.Name})
                                 .ToList()
                             }
                     };

@@ -11,18 +11,21 @@ namespace HomeTask.Models
     public class Group2Teacher : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
-        public ulong GroupID { get; set; }
+        [ForeignKey("Group")]
+        public long GroupID { get; set; }
 
-        public ulong TeacherID { get; set; }
+        [ForeignKey("Teacher")]
+        public long TeacherID { get; set; }
 
-        public ulong SubjectID { get; set; }
-
-        [ForeignKey("GroupID")]
+        [ForeignKey("Subject")]
+        public long SubjectID { get; set; }
+    
         public virtual Group Group { get; set; }
-
-        [ForeignKey("TeacherID")]
+        
         public virtual Teacher Teacher { get; set; }
+
+        public virtual Subject Subject { get; set; }
     }
 }

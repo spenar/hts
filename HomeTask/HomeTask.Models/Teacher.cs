@@ -11,7 +11,7 @@ namespace HomeTask.Models
     public class Teacher : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Surname { get; set; }
@@ -23,11 +23,9 @@ namespace HomeTask.Models
 
         public Guid UserID { get; set; }
 
-        public ICollection<Teacher2Subject> Subjects { get; set; }
-
-        public ulong InstitutionID { get; set; }
-
-        [ForeignKey("InstitutionID")]
+        public virtual ICollection<Teacher2Subject> Subjects { get; set; }
+        
+        [Required]
         public virtual Institution Institution { get; set; }
 
     }

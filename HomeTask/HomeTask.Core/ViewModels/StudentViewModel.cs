@@ -8,7 +8,7 @@ namespace HomeTask.Core.ViewModels
 {
     public class StudentViewModel
     {
-        public ulong ID { get; set; }
+        public object ID { get; set; }
 
         [Display(Name = "Фамилия")]
         public string Surname { get; set; }

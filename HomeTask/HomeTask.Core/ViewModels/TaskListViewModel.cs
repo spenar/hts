@@ -14,9 +14,9 @@ namespace HomeTask.Core.ViewModels
             this.GroupSubjects = new List<SubjectViewModel>();
         }
 
-        public ulong GroupID { get; set; }
+        public long GroupID { get; set; }
 
-        public ulong SubjectID { get; set; }
+        public long SubjectID { get; set; }
 
         public IEnumerable<SubjectViewModel> GroupSubjects { get; set; }
 

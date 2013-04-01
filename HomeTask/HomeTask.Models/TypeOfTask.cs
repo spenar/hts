@@ -11,7 +11,7 @@ namespace HomeTask.Models
     public class TypeOfTask : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; }

@@ -7,6 +7,6 @@ namespace HomeTask.Models.Contracts
 {
     public interface IEntity
     {
-        ulong ID { get; set; }
+        long Id { get; set; }
     }
 }

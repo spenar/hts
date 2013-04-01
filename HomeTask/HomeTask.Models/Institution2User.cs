@@ -11,16 +11,16 @@ namespace HomeTask.Models
     public class Institution2User :IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
-        public ulong InstitutionID { get; set; }
+        [ForeignKey("Institution")]
+        public long InstitutionID { get; set; }
 
+         [ForeignKey("User")]
         public Guid UserID { get; set; }
-
-        [ForeignKey("InstitutionID")]
+       
         public virtual Institution Institution { get; set; }
-
-        [ForeignKey("UserID")]
+       
         public virtual User User { get; set; }
     }
 }

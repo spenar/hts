@@ -29,28 +29,40 @@ namespace HomeTask.Controllers
         public ActionResult LogOn(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
-            return View();
+
+            return PartialView("Partial/LogOn");
         }
 
         [HttpPost]
-        public ActionResult LogOn(UserViewModel viewModel, string returnUrl)
+        public ActionResult LogOn(LoginViewModel viewModel, string returnUrl)
         {
+            var status = WebSecurity.Register("admin", "123456", "iamspenar@gmail.com", true, "Андрей",
+                                    "Зинченко");
+
+            if (status == MembershipCreateStatus.Success)
+            {
+                var useraId = WebSecurity.GetUserId("admin");
+                Roles.AddUserToRole("admin", RolesNames.InstituteAdministrator);
+                this.HttpContext.Cache.SetUserID(useraId);
+            }
             if (ModelState.IsValid)
             {
                 var isSuccess = WebSecurity.Login(viewModel.Username, viewModel.Password);
                 if (isSuccess)
                 {
+                    
+
                     var userID = WebSecurity.GetUserId(viewModel.Username);
-                    Session.SetUserID(userID);
-                    InitializeSession();
+                    this.HttpContext.Cache.SetUserID(userID);
+                    InitializeCache();
                     return RedirectToLocal(returnUrl);
                 }
 
                 ModelState.AddModelError("Login error!", "Неверный логин или пароль");
-                return View(viewModel);
+                return this.RedirectToAction("Index", "Home");
             }
 
-            return View(viewModel);
+            return this.RedirectToAction("Index", "Home");
         }
 
         public ActionResult LogOff()
@@ -61,12 +73,18 @@ namespace HomeTask.Controllers
         }
 
         [HttpGet]
+        public ActionResult SelectOfRole()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult StudentRegistration()
         {
             var viewModel = new StudentRegistrationViewModel();
-            viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
+            viewModel.Institutions = this._institutionManager.GetAll().ToList().Select(x => new SelectListItem()
                 {
-                    Value = x.ID.ToString(),
+                    Value = x.Id.ToString(),
                     Text = x.Name
                 });
 
@@ -80,6 +98,7 @@ namespace HomeTask.Controllers
             {
                 var status = WebSecurity.Register(viewModel.Username, viewModel.Password, viewModel.Email, true, viewModel.FirstName,
                                      viewModel.LastName);
+                
                 if (status == MembershipCreateStatus.Success)
                 {
                     var userID = WebSecurity.GetUserId(viewModel.Username);
@@ -90,10 +109,10 @@ namespace HomeTask.Controllers
                             GroupID = viewModel.GroupID,
                             IsConfirmed = false,
                             Surname = viewModel.FirstName,
-                            InstitutionID = viewModel.InstitutionID,
                             UserID = userID
                         });
-                    Session.SetUserID(userID);
+                    this._institutionManager.AddInstitution2User(viewModel.InstitutionID, userID);
+                    this.HttpContext.Cache.SetUserID(userID);
 
                     return this.RedirectToLocal(Url.Action("Index", "Home"));
                 }
@@ -102,7 +121,7 @@ namespace HomeTask.Controllers
                     ModelState.AddModelError("Register error!", "Register error please contact our support team!");
                     viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
                     {
-                        Value = x.ID.ToString(),
+                        Value = x.Id.ToString(),
                         Text = x.Name
                     });
                     return this.View("Registrations/StudentRegistration",viewModel);
@@ -111,7 +130,7 @@ namespace HomeTask.Controllers
 
             viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
             {
-                Value = x.ID.ToString(),
+                Value = x.Id.ToString(),
                 Text = x.Name
             });
             return View("Registrations/StudentRegistration", viewModel);
@@ -124,7 +143,7 @@ namespace HomeTask.Controllers
             var viewModel = new TeacherRegistrationViewModel();
             viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
             {
-                Value = x.ID.ToString(),
+                Value = x.Id.ToString(),
                 Text = x.Name
             });
 
@@ -149,9 +168,10 @@ namespace HomeTask.Controllers
                             IsConfirmed = false,
                             Surname = viewModel.FirstName,
                             UserID = userID
-                        }, viewModel.InstitutionID);
-                    Session.SetUserID(userID);
+                        });
 
+                    this._institutionManager.AddInstitution2User(viewModel.InstitutionID, userID);
+                    this.HttpContext.Cache.SetUserID(userID);
                     return this.RedirectToLocal(Url.Action("Index", "Home"));
                 }
                 else
@@ -159,7 +179,7 @@ namespace HomeTask.Controllers
                     ModelState.AddModelError("Register error!", "Register error please contact our support team!");
                     viewModel.Institutions = this._institutionManager.GetAll().Select(x => new SelectListItem()
                         {
-                            Value = x.ID.ToString(),
+                            Value = x.Id.ToString(),
                             Text = x.Name
                         });
 
@@ -183,26 +203,22 @@ namespace HomeTask.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        private void InitializeSession()
+        private void InitializeCache()
         {
             var userName = this.User.Identity.Name;
-            if (Roles.IsUserInRole(userName, RolesNames.InstituteAdministrator))
+            var institutionID = this._institutionManager.GetByUserID(this.HttpContext.Cache.GetUserID());
+            this.HttpContext.Cache.SetInstitutionID(institutionID);
+         
+            if (Roles.IsUserInRole(userName, RolesNames.Student))
             {
-                var institutionID = this._institutionManager.GetByUserID(Session.GetUserID());
-                Session.SetInstitutionID(institutionID);
-            }
-            else if (Roles.IsUserInRole(userName, RolesNames.Student))
-            {
-                var student = this._studentManager.GetByUserID(Session.GetUserID());
-                Session.SetInstitutionID(student.InstitutionID);
-                Session.SetStudentID(student.ID);
+                var student = this._studentManager.GetByUserID(this.HttpContext.Cache.GetUserID());
+                this.HttpContext.Cache.SetStudentID(student.Id);
 
             }
             else if (Roles.IsUserInRole(RolesNames.Teacher))
             {
-                var teacher = this._teacherManager.GetUserId(Session.GetUserID());
-                Session.SetInstitutionID(teacher.InstitutionID);
-                Session.SetTeacherID(teacher.ID);
+                var teacher = this._teacherManager.GetUserId(this.HttpContext.Cache.GetUserID());
+                this.HttpContext.Cache.SetTeacherID(teacher.Id);
             }
         }
     }

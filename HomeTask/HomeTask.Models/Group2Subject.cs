@@ -11,16 +11,16 @@ namespace HomeTask.Models
     public class Group2Subject :IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
-        public ulong GroupID { get; set; }
+        [ForeignKey("Group")]
+        public long GroupID { get; set; }
 
-        public ulong SubjectID { get; set; }
-
-        [ForeignKey("GroupID")]
+        [ForeignKey("Subject")]
+        public long SubjectID { get; set; }
+       
         public virtual Group Group { get; set; }
-
-        [ForeignKey("SubjectID")]
+        
         public virtual Subject Subject { get; set; }
     }
 }

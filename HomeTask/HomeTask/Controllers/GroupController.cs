@@ -9,6 +9,7 @@ using HomeTask.Managers.Contracts;
 
 namespace HomeTask.Controllers
 {
+
     public class GroupController : Controller
     {
         private readonly IGroupManager _groupManager;
@@ -18,8 +19,7 @@ namespace HomeTask.Controllers
             this._groupManager = groupManager;
         }
 
-
-        public ActionResult GetGroup(ulong institutionID)
+        public ActionResult GetGroups(ulong institutionID)
         {
             var groups = this._groupManager.GetAll(institutionID).Select(GroupMapper.ToViewModelExpression);
 

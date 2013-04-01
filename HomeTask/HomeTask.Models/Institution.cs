@@ -10,7 +10,7 @@ namespace HomeTask.Models
     public class Institution : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -22,5 +22,7 @@ namespace HomeTask.Models
         public string Address { get; set; }
 
         public string Director { get; set; }
+
+        public string Accreditation { get; set; }
     }
 }

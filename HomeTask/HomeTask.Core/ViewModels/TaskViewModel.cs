@@ -9,7 +9,7 @@ namespace HomeTask.Core.ViewModels
     public class TaskViewModel
     {
 
-        public ulong ID { get; set; }
+        public object ID { get; set; }
 
         [Display(Name = "Текст задания")]
         [Required(ErrorMessage = "Поле не можеть быть пустым")]
@@ -28,12 +28,12 @@ namespace HomeTask.Core.ViewModels
         public string TypeName { get; set; }
 
         [Required]
-        public ulong TeacherID { get; set; }
+        public long TeacherID { get; set; }
 
         [Required]
         public string GroupID { get; set; }
 
         [Required]
-        public ulong SubjectID { get; set; }
+        public long SubjectID { get; set; }
     }
 }

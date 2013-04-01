@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.css")" />
+    <title>Ваша роль</title>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="span4">
+            </div>
+        <div class="span4">
+            <a href="@Url.Action("TeacherRegistration", "Account")" class="btn btn-large btn-block btn-primary">Я преподаватель</a>
+            <a href="@Url.Action("StudentRegistration", "Account")" class="btn btn-large btn-block btn-success">Я студент</a>
+        </div>
+          <div class="span4">
+            </div>
+    </div>
+</body>
+</html>

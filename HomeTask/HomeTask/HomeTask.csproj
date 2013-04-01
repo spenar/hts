@@ -146,13 +146,14 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administrator\AdministratorInstitutesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InstituteAdmin\AdminGroupController.cs" />
-    <Compile Include="Controllers\InstituteAdmin\AdminStudentController.cs" />
-    <Compile Include="Controllers\InstituteAdmin\AdminSubjectController.cs" />
-    <Compile Include="Controllers\InstituteAdmin\AdminTeacherController.cs" />
+    <Compile Include="Controllers\InstituteManager\GroupManagerController.cs" />
+    <Compile Include="Controllers\InstituteManager\StudentManagerController.cs" />
+    <Compile Include="Controllers\InstituteManager\SubjectManagerController.cs" />
+    <Compile Include="Controllers\InstituteManager\TeacherManagerController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
     <Compile Include="Controllers\Teacher\TeacherSubjectController.cs" />
     <Compile Include="Controllers\Teacher\TeacherTaskController.cs" />
@@ -208,6 +209,10 @@
       <Project>{A98B8531-2B35-419B-8F13-C27DA3B326D3}</Project>
       <Name>HomeTask.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeTask.DataAccessLayer\HomeTask.DataAccessLayer.csproj">
+      <Project>{D7CD4529-04F3-4ABD-8FBE-23A686F12D73}</Project>
+      <Name>HomeTask.DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeTask.Managers\HomeTask.Managers.csproj">
       <Project>{34786475-0FDD-4130-A99E-A74C1C57A18A}</Project>
       <Name>HomeTask.Managers</Name>
@@ -231,40 +236,37 @@
     <Content Include="Views\Shared\Layout\_LayoutLogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\LogOn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\Registrations\StudentRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminGroup\Index.cshtml" />
+    <Content Include="Views\GroupManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminStudent\Partial\GetStudentsOfGroup.cshtml" />
+    <Content Include="Views\StudentManager\Partial\GetStudentsOfGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminSubject\Partial\GetSubjectOfGroup.cshtml" />
+    <Content Include="Views\SubjectManager\Partial\GetSubjectOfGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminGroup\Partial\AddEditGroupFields.cshtml" />
+    <Content Include="Views\GroupManager\Partial\AddEditGroupFields.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminGroup\Partial\AddGroup.cshtml" />
+    <Content Include="Views\GroupManager\Partial\AddGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminGroup\Partial\EditGroup.cshtml" />
+    <Content Include="Views\GroupManager\Partial\EditGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminSubject\Partial\EditSubjectOfGroup.cshtml" />
+    <Content Include="Views\SubjectManager\Partial\EditSubjectOfGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminStudent\Index.cshtml" />
+    <Content Include="Views\StudentManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminTeacher\Index.cshtml" />
+    <Content Include="Views\TeacherManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Registrations\TeacherRegistration.cshtml" />
@@ -292,6 +294,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\TeacherTask\Partial\EditTask.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\TeacherTask\Partial\GroupsList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layout\_HomeLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Partial\LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\SelectOfRole.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministratorInstitutes\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministratorInstitutes\Partial\AddEditFields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministratorInstitutes\Partial\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministratorInstitutes\Partial\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

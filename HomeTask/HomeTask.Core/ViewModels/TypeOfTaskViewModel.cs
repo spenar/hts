@@ -8,7 +8,7 @@ namespace HomeTask.Core.ViewModels
 {
     public class TypeOfTaskViewModel
     {
-        public ulong ID { get; set; }
+        public object ID { get; set; }
 
         [Required]
         public string Name { get; set; }

@@ -12,7 +12,7 @@ namespace HomeTask.Managers.Contracts
 
         IQueryable<Student> GetByGroudID(object groupID);
 
-        IQueryable<Student> GetByInstitute(object instituteID);
+        IQueryable<Student> GetByInstitute(object insitutionID);
 
         void Add(Student student);
 

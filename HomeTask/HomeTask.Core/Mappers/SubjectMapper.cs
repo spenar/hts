@@ -14,14 +14,14 @@ namespace HomeTask.Core.Mappers
         public static Expression<Func<Subject, SubjectViewModel>> ToViewModelExpression = subject =>
                                                                                           new SubjectViewModel()
                                                                                               {
-                                                                                                  ID = subject.ID,
+                                                                                                  ID = subject.Id,
                                                                                                   Name = subject.Name
                                                                                               };
 
         public static Expression<Func<SubjectViewModel, Subject>> ToModelExpression = viewModel =>
                                                                                       new Subject()
                                                                                           {
-                                                                                              ID = viewModel.ID,
+                                                                                              Id = (long)viewModel.ID,
                                                                                               Name = viewModel.Name
                                                                                           };
 

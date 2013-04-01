@@ -6,16 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>@(ViewBag.Title ?? "")</title>
     <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.css")" />
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="@Url.Content("~Content/Scripts/jquery.validate.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~Content/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~Content/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~Content/Scripts/bootstrap.min.js")"></script>
-    <script type="text/javascript" >
-        $(ducument).ready(function() {
+    <script type="text/javascript" src="@Url.Content("~/Content/Scripts/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript">
+        $(ducument).ready(function () {
             $('.modal-window-renderer').click(function (e) {
                 e.preventDefault();
                 var url = $(this).attr('href');
@@ -32,13 +32,12 @@
             });
 
 
-            $('.submit-form').live("onsubmit",function (e) {
+            $('.submit-form').live("onsubmit", function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
                 $.post(url, $(this).serialize(),
                     function (data) {
-                        eval('var success=' + data);
-                        if (success) {
+                        if (data.success) {
                             $('#modalWindow').modal('hide');
                         } else {
                             alert("Ошибка! Что-то пошло не правильно...");
@@ -49,13 +48,28 @@
     </script>
     @this.RenderSection("header", false)
 </head>
-    <body>
+<body>
     @{
         Html.RenderAction("GetMenu", "MainMenu"); 
     }
     <div class="container-fluid">
         <div class="row-fluid">
             @this.RenderBody()
+        </div>
+    </div>
+    <div class="modal hide fade" id="modalWindow">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;</button>
+            <h3>
+                Modal header</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                One fine body…</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn">Close</a> <a href="#" class="btn btn-primary"></a>
         </div>
     </div>
 </body>

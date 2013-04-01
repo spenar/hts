@@ -1,6 +1,6 @@
-﻿@model ulong
+﻿@model long
 
-@using (Html.BeginForm("Delete", "TeacherSubject", FormMethod.Post))
+@using (Html.BeginForm("Delete", "TeacherSubject", new { subjectID = Model }, FormMethod.Post))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -9,7 +9,6 @@
             Подтверждение</h3>
     </div>
     <div class="modal-body">
-        @Html.HiddenFor(x => x)
         Вы уверены что хотите удалить предмет из списка?
     </div>
     <div class="modal-footer">

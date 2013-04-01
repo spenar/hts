@@ -22,12 +22,12 @@ namespace HomeTask.Core.FIlters
 
         public Expression<Func<Task, bool>> GroupFilter
         {
-            get { return task => this.GroupID == null || task.GroupID == (ulong)this.GroupID; }
+            get { return task => this.GroupID == null || task.GroupID == (long)this.GroupID; }
         }
 
         public Expression<Func<Task, bool>> TeacherFilter
         {
-            get { return task => this.TeacherID == null || task.TeacherID == (ulong)this.TeacherID; }
+            get { return task => this.TeacherID == null || task.TeacherID == (long)this.TeacherID; }
         }
 
         public Expression<Func<Task, bool>> DateFilter
@@ -37,7 +37,7 @@ namespace HomeTask.Core.FIlters
 
         public Expression<Func<Task, bool>> SubjectFilter
         {
-            get { return task => this.SubjectID == null || task.SubjectID == (ulong) this.SubjectID; }
+            get { return task => this.SubjectID == null || task.SubjectID == (long) this.SubjectID; }
         }
     }
 }

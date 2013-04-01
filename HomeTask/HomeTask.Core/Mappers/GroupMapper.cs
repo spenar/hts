@@ -14,7 +14,7 @@ namespace HomeTask.Core.Mappers
         public static Expression<Func<Group, GroupViewModel>> ToViewModelExpression = group =>
                                                                                       new GroupViewModel()
                                                                                           {
-                                                                                              ID = group.ID,
+                                                                                              ID = group.Id,
                                                                                               Name = group.Name,
                                                                                               QuantityOfPupils = group.QuantityOfPupils,
                                                                                               Specialty = group.Specialty

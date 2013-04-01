@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Security;
 using HomeTask.Core;
+
 
 public class CodeFirstMembershipProvider : MembershipProvider
 {
@@ -322,11 +321,7 @@ public class CodeFirstMembershipProvider : MembershipProvider
 
     public override int GetNumberOfUsersOnline()
     {
-        DateTime DateActive = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(Convert.ToDouble(Membership.UserIsOnlineTimeWindow)));
-        using (DataContext Context = new DataContext())
-        {
-            return Context.Users.Where(Usr => Usr.LastActivityDate > DateActive).Count();
-        }
+        throw new NotImplementedException();
     }
 
     public override bool DeleteUser(string username, bool deleteAllRelatedData)

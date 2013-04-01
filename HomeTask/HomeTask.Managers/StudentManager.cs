@@ -11,10 +11,12 @@ namespace HomeTask.Managers
     public class StudentManager : IStudentManager
     {
         private readonly IRepository<Student> _studentRepository;
+        private readonly IRepository<Institution2User> _institutionToUserRepository; 
 
-        public StudentManager(IRepository<Student> studentRepository)
+        public StudentManager(IRepository<Student> studentRepository, IRepository<Institution2User> institutionToUserRepository)
         {
             this._studentRepository = studentRepository;
+            this._institutionToUserRepository = institutionToUserRepository;
         }
 
         public Student GetByUserID(object userID)
@@ -24,12 +26,13 @@ namespace HomeTask.Managers
 
         public IQueryable<Student> GetByGroudID(object groupID)
         {
-            return this._studentRepository.GetAll().Where(x => x.GroupID == (ulong) groupID);
+            return this._studentRepository.GetAll().Where(x => x.GroupID == (long) groupID);
         }
 
-        public IQueryable<Student> GetByInstitute(object instituteID)
+        public IQueryable<Student> GetByInstitute(object insitutionID)
         {
-            return this._studentRepository.GetAll().Where(x => x.InstitutionID == (ulong)instituteID);
+            var usersId = _institutionToUserRepository.GetAll().Where(x => x.InstitutionID == (long)insitutionID);
+            return this._studentRepository.GetAll().Where(x => usersId.Any(z => z.UserID == x.UserID));
         }
 
         public void Add(Student student)

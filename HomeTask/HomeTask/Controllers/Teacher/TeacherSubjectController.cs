@@ -24,7 +24,7 @@ namespace HomeTask.Controllers.Teacher
         public ActionResult Index(SubjectListViewModel viewModel)
         {
             viewModel.SubjectViewModels =
-                this._subjectManager.GetByTeacher(Session.GetTeacherID())
+                this._subjectManager.GetByTeacher(this.HttpContext.Cache.GetTeacherID())
                     .Select(SubjectMapper.ToViewModelExpression.Compile())
                     .ToList();
 
@@ -42,7 +42,7 @@ namespace HomeTask.Controllers.Teacher
         {
             if (ModelState.IsValid)
             {
-                var teacherID = Session.GetTeacherID();
+                var teacherID = this.HttpContext.Cache.GetTeacherID();
                 if (teacherID != null)
                 {
                     var subject = model.ToModel();
@@ -58,15 +58,15 @@ namespace HomeTask.Controllers.Teacher
         }
 
         [HttpGet]
-        public ActionResult DeleteSubject2Teacher(ulong subjectID)
+        public ActionResult DeleteSubject2Teacher(long subjectID)
         {
             return this.PartialView("Partial/Delete", subjectID);
         }
 
         [HttpPost]
-        public ActionResult Delete(ulong subjectID)
+        public ActionResult Delete(long subjectID)
         {
-            this._subjectManager.DeleteSubject2Teacher(subjectID, Session.GetTeacherID());
+            this._subjectManager.DeleteSubject2Teacher(subjectID, this.HttpContext.Cache.GetTeacherID());
             return this.Json(new {success = true});
         }
     }

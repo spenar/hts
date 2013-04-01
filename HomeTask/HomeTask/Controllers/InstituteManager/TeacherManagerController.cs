@@ -9,14 +9,14 @@ using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
 
-namespace HomeTask.Controllers.InstituteAdmin
+namespace HomeTask.Controllers.InstituteManager
 {
     [Authorize(Roles = RolesNames.InstituteAdministrator)]
-    public class AdminTeacherController : BaseController
+    public class TeacherManagerController : BaseController
     {
         private readonly ITeacherManager _teacherManager;
 
-        public AdminTeacherController(ITeacherManager teacherManager) : base()
+        public TeacherManagerController(ITeacherManager teacherManager) : base()
         {
             this._teacherManager = teacherManager;
         }
@@ -26,18 +26,11 @@ namespace HomeTask.Controllers.InstituteAdmin
             var viewModel = new TeacherListViewModel();
             viewModel.TeacherViewModels =
                 this._teacherManager
-                    .GetAll(Session.GetInstitutionID())
+                    .GetAll(this.HttpContext.Cache.GetInstitutionID())
                     .Select(TeacherMapper.ToViewModelExpression.Compile())
                     .ToList();
 
             return View(viewModel);
         }
-
-        [HttpGet]
-        public ActionResult Add()
-        {
-            return this.PartialView("")
-        }
-
     }
 }

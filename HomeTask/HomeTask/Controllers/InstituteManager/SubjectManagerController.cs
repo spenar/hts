@@ -8,10 +8,10 @@ using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
 
-namespace HomeTask.Controllers.InstituteAdmin
+namespace HomeTask.Controllers.InstituteManager
 {
     [Authorize(Roles = RolesNames.InstituteAdministrator)]
-    public class AdminSubjectController : BaseController
+    public class SubjectManagerController : BaseController
     {
         private readonly ISubjectManager _subjectManager;
         private readonly IInstitutionManager _institutionManager;
@@ -20,11 +20,11 @@ namespace HomeTask.Controllers.InstituteAdmin
         {
             get
             {
-                return this._institutionManager.GetByUserID(this.CurrentUserID).ID;
+                return this._institutionManager.GetByUserID(this.CurrentUserID).Id;
             }
         }
 
-        public AdminSubjectController(ISubjectManager subjectManager, IInstitutionManager institutionManager):base()
+        public SubjectManagerController(ISubjectManager subjectManager, IInstitutionManager institutionManager):base()
         {
             this._subjectManager = subjectManager;
             this._institutionManager = institutionManager;
@@ -54,7 +54,7 @@ namespace HomeTask.Controllers.InstituteAdmin
                                                       .GetByGroup(groupID)
                                                       .Select(x => new SelectListItem()
                                                           {
-                                                              Value = x.ID.ToString(),
+                                                              Value = x.Id.ToString(),
                                                               Text = x.Name
                                                           });
 

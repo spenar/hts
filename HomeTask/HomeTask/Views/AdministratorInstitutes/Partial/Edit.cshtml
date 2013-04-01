@@ -1,0 +1,6 @@
+﻿@model HomeTask.Core.ViewModels.InstitutionViewModel
+
+@using (Html.BeginForm("Edit", "AdministratorInstitutes", FormMethod.Post))
+{
+        Html.RenderPartial("Partial/AddEditFields", Model);
+}

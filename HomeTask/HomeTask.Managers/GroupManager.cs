@@ -33,7 +33,7 @@ namespace HomeTask.Managers
 
         public IQueryable<Group> GetAll(object insitutionID)
         {
-            return this._groupRepository.GetAll().Where(x => x.InstitutionID == (ulong)insitutionID);
+            return this._groupRepository.GetAll().Where(x => x.InstitutionID == (long)insitutionID);
         }
 
         public void Add(Group group, object insitutionID)
@@ -81,8 +81,8 @@ namespace HomeTask.Managers
                 {
                     this._groupToSubjectRepository.Add(new Group2Subject()
                         {
-                            GroupID = (ulong)groupID,
-                            SubjectID = (ulong)subjectID
+                            GroupID = (long)groupID,
+                            SubjectID = (long)subjectID
                         }
                         );
                 }

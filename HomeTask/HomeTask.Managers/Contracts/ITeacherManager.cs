@@ -18,7 +18,7 @@ namespace HomeTask.Managers.Contracts
 
         bool IsExist(object ID);
 
-        void Add(Teacher teacher, object insitutionID);
+        void Add(Teacher teacher);
 
         void Update(Teacher teacher);
 

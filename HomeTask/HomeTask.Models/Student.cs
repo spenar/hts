@@ -11,7 +11,7 @@ namespace HomeTask.Models
     public class Student : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         public string Surname { get; set; }
 
@@ -19,13 +19,11 @@ namespace HomeTask.Models
 
         public bool IsConfirmed { get; set; }
 
-        public ulong GroupID { get; set; }
+        [ForeignKey("Group")]
+        public long GroupID { get; set; }
 
         public Guid UserID { get; set; }
-
-        public ulong InstitutionID { get; set; }
-
-        [ForeignKey("GroupID")]
+       
         public virtual Group Group { get; set; }
     }
 }

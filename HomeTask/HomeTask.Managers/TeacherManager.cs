@@ -13,14 +13,17 @@ namespace HomeTask.Managers
         private readonly IRepository<Teacher> _teacherRepository;
         private readonly IRepository<Group2Teacher> _groupToTeacherRepository;
         private readonly IGroupManager _groupManager;
+        private readonly IRepository<Institution2User> _institutionToUserRepository; 
 
         public TeacherManager(IRepository<Teacher> teacherRepository,
                               IRepository<Group2Teacher> groupToTeacherRepository,
-                              IGroupManager groupManager)
+                              IGroupManager groupManager,
+                              IRepository<Institution2User> institutionToUserRepository)
         {
             this._teacherRepository = teacherRepository;
             this._groupToTeacherRepository = groupToTeacherRepository;
             this._groupManager = groupManager;
+            this._institutionToUserRepository = institutionToUserRepository;
         }
 
 
@@ -31,7 +34,8 @@ namespace HomeTask.Managers
 
         public IQueryable<Teacher> GetAll(object insitutionID)
         {
-            return this._teacherRepository.GetAll().Where(x => x.InstitutionID == (ulong)insitutionID);
+            var usersId = _institutionToUserRepository.GetAll().Where(x => x.InstitutionID == (long) insitutionID);
+            return this._teacherRepository.GetAll().Where(x => usersId.Any(z => z.UserID == x.UserID));
         }
 
         public Teacher GetUserId(object ID)
@@ -44,11 +48,10 @@ namespace HomeTask.Managers
             return this._teacherRepository.IsEntityExist(ID);
         }
 
-        public void Add(Teacher teacher, object insitutionID)
+        public void Add(Teacher teacher)
         {
             if (this.ValidateEntity(teacher))
             {
-                teacher.InstitutionID = (ulong)insitutionID;
                 this._teacherRepository.Add(teacher);
                 this._teacherRepository.Commit();
             }
@@ -73,11 +76,11 @@ namespace HomeTask.Managers
         {
             var teachersID = this._groupToTeacherRepository
                                  .GetAll()
-                                 .Where(x => x.GroupID == (ulong)groupID)
+                                 .Where(x => x.GroupID == (long)groupID)
                                  .Select(x => x.TeacherID);
 
             return this._teacherRepository.GetAll()
-                       .Where(x => teachersID.Contains(x.ID));
+                       .Where(x => teachersID.Contains(x.Id));
         }
 
         private bool ValidateEntity(Teacher entity)
@@ -93,8 +96,8 @@ namespace HomeTask.Managers
                 {
                     this._groupToTeacherRepository.Add(new Group2Teacher()
                     {
-                        TeacherID = (ulong)teacherID,
-                        GroupID = (ulong)groupID
+                        TeacherID = (long)teacherID,
+                        GroupID = (long)groupID
                     });
                 }
             }

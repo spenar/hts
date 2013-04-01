@@ -14,9 +14,9 @@ namespace HomeTask.Core.ViewModels
             this.Institutions = new List<SelectListItem>();
         }
 
-        public ulong InstitutionID { get; set; }
+        public long InstitutionID { get; set; }
 
-        public ulong GroupID { get; set; }
+        public long GroupID { get; set; }
 
         [Compare("Password")]
         [Display(Name = "Подтверждение пароля")]

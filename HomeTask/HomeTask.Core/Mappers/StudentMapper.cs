@@ -13,7 +13,7 @@ namespace HomeTask.Core.Mappers
         public static Expression<Func<Student, StudentViewModel>> ToViewModelExpression = student =>
                                                                                           new StudentViewModel()
                                                                                               {
-                                                                                                  ID = student.ID,
+                                                                                                  ID = student.Id,
                                                                                                   Group = student.Group.Name,
                                                                                                   IsConfirmed = student.IsConfirmed,
                                                                                                   Name = student.Name,

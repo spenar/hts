@@ -54,8 +54,8 @@
     <Compile Include="FIlters\TaskFilter.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Helpers\SessionKeys\SessionKey.cs" />
-    <Compile Include="HomeTaskContext.cs" />
     <Compile Include="Mappers\GroupMapper.cs" />
+    <Compile Include="Mappers\InstituteMapper.cs" />
     <Compile Include="Mappers\StudentMapper.cs" />
     <Compile Include="Mappers\SubjectMapper.cs" />
     <Compile Include="Mappers\TaskMapper.cs" />
@@ -66,6 +66,7 @@
     <Compile Include="ViewModels\GroupListViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\InstitutionViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\StudentListViewModel.cs" />
     <Compile Include="ViewModels\StudentRegistrationViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />

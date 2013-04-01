@@ -11,7 +11,7 @@ namespace HomeTask.Models
     public class Task : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Text { get; set; }
@@ -22,24 +22,24 @@ namespace HomeTask.Models
 
         public DateTime Date { get; set; }
 
-        public ulong TypeID { get; set; }
+        [ForeignKey("Type")]
+        public long TypeID { get; set; }
 
-        public ulong TeacherID { get; set; }
+        [ForeignKey("Teacher")]
+        public long TeacherID { get; set; }
 
-        public ulong GroupID { get; set; }
+        [ForeignKey("Group")]
+        public long GroupID { get; set; }
 
-        public ulong SubjectID { get; set; }
+        [ForeignKey("Subject")]
+        public long SubjectID { get; set; }
+      
+        public virtual TypeOfTask Type { get; set; }
 
-        [ForeignKey("TypeID")]
-        public TypeOfTask Type { get; set; }
+        public virtual Teacher Teacher { get; set; }
 
-        [ForeignKey("TeacherID")]
-        public Teacher Teacher { get; set; }
-
-        [ForeignKey("GroupID")]
-        public Group Group { get; set; }
-
-        [ForeignKey("SubjectID")]
-        public Subject Subject { get; set; }
+        public virtual Group Group { get; set; }
+      
+        public virtual Subject Subject { get; set; }
     }
 }

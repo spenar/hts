@@ -14,7 +14,7 @@ namespace HomeTask.Core.Mappers
         public static Expression<Func<TypeOfTask, TypeOfTaskViewModel>> ToViewModelExpression = tot =>
                                                                                                 new TypeOfTaskViewModel()
                                                                                                     {
-                                                                                                        ID = tot.ID,
+                                                                                                        ID = tot.Id,
                                                                                                         Name = tot.Name
                                                                                                     };
 

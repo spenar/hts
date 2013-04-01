@@ -9,6 +9,7 @@ using HomeTask.Core.Mappers;
 using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models;
+using HomeTask.Models.MainMenu;
 using HomeTask.Models.Roles;
 
 namespace HomeTask.Controllers.Teacher
@@ -19,24 +20,26 @@ namespace HomeTask.Controllers.Teacher
         private readonly ITaskManager _taskManager;
         private readonly ISubjectManager _subjectManager;
         private readonly ITypeOfTaskManager _typeOfTaskManager;
+        private readonly IGroupManager _groupManager;
 
-        public TeacherTaskController(ITaskManager taskManager, ISubjectManager subjectManager, ITypeOfTaskManager typeOfTaskManager)
+        public TeacherTaskController(ITaskManager taskManager, ISubjectManager subjectManager, ITypeOfTaskManager typeOfTaskManager, IGroupManager groupManager)
         {
             this._taskManager = taskManager;
             this._subjectManager = subjectManager;
             this._typeOfTaskManager = typeOfTaskManager;
+            this._groupManager = groupManager;
         }
 
         public ActionResult Index(TaskFilter filter)
         {
             var viewModel = new TaskListViewModel();
-            viewModel.GroupID = (ulong?)filter.GroupID ?? 0;
-            viewModel.SubjectID = (ulong?)filter.SubjectID ?? 0;
+            viewModel.GroupID = (long?)filter.GroupID ?? 0;
+            viewModel.SubjectID = (long?)filter.SubjectID ?? 0;
             viewModel.GroupSubjects = this._subjectManager
                                           .GetByGroup(filter.GroupID)
                                           .Select(SubjectMapper.ToViewModelExpression.Compile());
 
-            filter.TeacherID = Session.GetTeacherID();
+            filter.TeacherID = this.HttpContext.Cache.GetTeacherID();
 
             var tasks = this._taskManager.GetByFilter(filter);
             var identifiers = tasks.Select(x => x.TypeID);
@@ -68,7 +71,7 @@ namespace HomeTask.Controllers.Teacher
                     this._typeOfTaskManager.Add(typeOftask);
                 }
                 var task = viewModel.ToModel();
-                task.TypeID = typeOftask.ID;
+                task.TypeID = typeOftask.Id;
                 this._taskManager.Add(task);
             }
 
@@ -76,5 +79,10 @@ namespace HomeTask.Controllers.Teacher
         }
 
 
+        public ActionResult Groups(ulong selectedgroup)
+        {
+            var groups = this._groupManager.GetAll(this.HttpContext.Cache.GetInstitutionID());
+            return PartialView("Partial/GroupsList", groups);
+        }
     }
 }

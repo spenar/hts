@@ -11,18 +11,16 @@ namespace HomeTask.Models
     public class Teacher2Subject : IEntity
     {
         [Key]
-        public ulong ID { get; set; }
+        public long Id { get; set; }
 
-        [Required]
-        public ulong TeacherID { get; set; }
+        [ForeignKey("Teacher")]
+        public long TeacherID { get; set; }
 
-        [Required]
-        public ulong SubjectID { get; set; }
-
-        [ForeignKey("TeacherID")]
+        [ForeignKey("Subject")]
+        public long SubjectID { get; set; }
+        
         public virtual Teacher Teacher { get; set; }
-
-        [ForeignKey("SubjectID")]
+     
         public virtual Subject Subject { get; set; }
     }
 }

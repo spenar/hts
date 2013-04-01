@@ -16,13 +16,13 @@ namespace HomeTask.Core.Mappers
                                                                                         {
                                                                                             Date = task.Date,
                                                                                             FileName = task.FileName,
-                                                                                            GroupID = task.GroupID,
-                                                                                            ID = task.ID,
+                                                                                            GroupID = task.GroupID.ToString(),
+                                                                                            ID = task.Id,
                                                                                             SubjectID = task.SubjectID,
                                                                                             TeacherID = task.TeacherID,
                                                                                             Text = task.Text,
                                                                                             Title = task.Title,
-                                                                                            TypeID = task.TypeID
+                                                                                            TypeName = task.Type.Name
                                                                                         };
 
         public static TaskViewModel ToViewModel(this Task model)

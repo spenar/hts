@@ -8,10 +8,10 @@ using HomeTask.Core.ViewModels;
 using HomeTask.Managers.Contracts;
 using HomeTask.Models.Roles;
 
-namespace HomeTask.Controllers.InstituteAdmin
+namespace HomeTask.Controllers.InstituteManager
 {
     [Authorize(Roles = RolesNames.InstituteAdministrator)]
-    public class AdminGroupController : BaseController
+    public class GroupManagerController : BaseController
     {
         private readonly IGroupManager _groupManager;
         private readonly IInstitutionManager _institutionManager;
@@ -20,11 +20,11 @@ namespace HomeTask.Controllers.InstituteAdmin
         {
             get
             {
-                return this._institutionManager.GetByUserID(this.CurrentUserID).ID;
+                return this._institutionManager.GetByUserID(this.CurrentUserID).Id;
             }
         }
 
-        public AdminGroupController(IGroupManager groupManager, IInstitutionManager institutionManager)
+        public GroupManagerController(IGroupManager groupManager, IInstitutionManager institutionManager)
         {
             this._groupManager = groupManager;
             this._institutionManager = institutionManager;
@@ -55,6 +55,8 @@ namespace HomeTask.Controllers.InstituteAdmin
             {
                 var model = viewModel.ToModel();
                 this._groupManager.Add(model, this.GetInstitutionID);
+
+                return this.Json(new { success = true });
             }
             return this.Json(new {success = false});
         }

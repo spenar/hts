@@ -16,7 +16,7 @@ namespace HomeTask.Managers.Contracts
 
         void Add(Institution institution);
 
-        void AddAdministrator(object institutionID, Guid userID);
+        void AddInstitution2User(object institutionID, Guid userID);
 
         void Update(Institution institution);
 
